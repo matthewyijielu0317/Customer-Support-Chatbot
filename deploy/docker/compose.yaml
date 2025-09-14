@@ -1,0 +1,38 @@
+services:
+  api:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/api.Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - PINECONE_API_KEY=${PINECONE_API_KEY}
+      - POSTGRES_DSN=postgresql+asyncpg://user:password@postgres:5432/ecomm
+      - REDIS_URL=redis://redis:6379/0
+      - MONGODB_URI=mongodb://mongo:27017
+    depends_on:
+      - postgres
+      - redis
+      - mongo
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: ecomm
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+
+

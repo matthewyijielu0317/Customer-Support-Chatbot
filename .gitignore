@@ -1,0 +1,59 @@
+# OS
+.DS_Store
+
+# Python bytecode/cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+.python-version
+
+# Environment variables & secrets
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Packaging / build
+build/
+dist/
+.eggs/
+*.egg-info/
+*.egg
+
+# Logs & runtime files
+*.log
+logs/
+*.out
+*.err
+
+# Test & coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Type checking / tooling caches
+.mypy_cache/
+.pytype/
+.ruff_cache/
+.pyre/
+.cache/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Docker local overrides
+docker-compose.override.yml
+

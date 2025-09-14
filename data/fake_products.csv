@@ -1,0 +1,779 @@
+product_id,product_name,product_category,product_description,unit_price
+1,Crispy Kale Chips,Food - Snacks,"Baked kale chips seasoned for a healthy, crunchy snack.",2.99
+2,Wall Art,Home,Abstract canvas print to enhance home decor.,45.0
+3,Smartphone Projector Kit,Electronics,DIY kit to convert your smartphone into a mini projector.,24.99
+4,Sooji (Semolina),Food - Baking,"Fine semolina flour, perfect for pasta and desserts.",1.99
+5,Californian Raisins,Food - Dried Fruits,"Sweet dried raisins, perfect for snacks or baking.",3.19
+6,Kids' Learning Tablet,Electronics,Educational tablet designed for preschool-age children.,129.99
+7,Wooden Blocks,Toys,Classic wooden building blocks for toddlers.,24.99
+8,Adjustable Kneeling Pad,Garden,Comfortable kneeling pad for gardening or home projects.,18.99
+9,Fitness Tracker Band,Fitness,Affordable fitness tracker with heart rate monitor.,29.99
+10,LED Desk Light,Home,Adjustable LED desk light with brightness settings.,34.99
+11,High-Quality Yoga Mat,Fitness,Non-slip mat designed for yoga and fitness exercises.,34.99
+12,Electric Nail File Kit,Beauty,Professional-grade nail care set for manicures and pedicures.,34.99
+13,Travel Laundry Bag,Travel,Compact laundry bag for travel use.,9.99
+14,Asian Stir-Fry Vegetables,Food - Frozen Foods,Frozen mix of colorful stir-fry veggies.,2.99
+15,Whole Grain Cereal,Food - Breakfast,"Healthy whole grain cereal, great for breakfast.",3.49
+16,Cinnamon Raisin Bread,Food - Bakery,"Sweet bread with cinnamon and raisins, great for breakfast or snacks.",3.79
+17,Weighted Blanket for Adults,Health,A calming blanket that provides gentle pressure for relaxation.,59.99
+18,Creamy Tomato Basil Soup,Food - Canned Goods,"Rich and creamy tomato basil soup, perfect with a grilled cheese.",3.29
+19,Ultraviolet Phone Sanitizer,Health,UV sanitizer that kills germs on your smartphone.,39.99
+20,Cocoa Powder,Food - Baking,Rich cocoa powder for baking and chocolate recipes.,3.99
+21,Wireless Gaming Mouse,Gaming,Ergonomic mouse designed for gamers with high DPI.,39.99
+22,Chicken Broth,Food - Canned Goods,"Rich and flavorful chicken broth, great for soups.",2.49
+23,Tandoori Chicken Marinade,Food - Condiments,Delicious and tangy marinade for grilling or baking chicken.,2.49
+24,Honey Almond Granola Bars,Food - Snacks,Chewy granola bars made with honey and almonds.,3.99
+25,Sunglasses Case,Accessories,Hard-shell case for protecting sunglasses.,15.99
+26,Wrap Jumpsuit,Clothing - Jumpsuits,Chic wrap jumpsuit that flatters the body and is perfect for any occasion.,54.99
+27,Adjustable Pet Grooming Table,Pets,Professional grooming table with adjustable height.,109.99
+28,Almond Butter Cups,Food - Snacks,"Rich chocolate cups filled with almond butter, a delicious treat.",3.29
+29,Smartphone Car Mount with Wireless Charging,Automotive,Secure phone mount that wirelessly charges your device while driving.,39.99
+30,Portable Speakers,Audio,Bluetooth speakers with excellent sound quality.,69.99
+31,Fitbit Activity Tracker,Fitness,Advanced wristband that tracks daily activities and sleep.,99.99
+32,Self-Cleaning Cat Litter Box,Pets,Automated litter box that cleans itself after each use.,199.99
+33,Cinnamon Roll Dough,Food - Bakery,Ready-to-bake cinnamon roll dough for easy breakfasts.,4.49
+34,Oven-Baked Parmesan Zucchini,Food - Frozen Vegetables,"Frozen zucchini slices coated in parmesan cheese, perfect for baking or frying.",4.99
+35,Legging Pants,Clothing - Activewear,Comfortable and stretchy legging pants perfect for workouts or daily wear.,34.99
+36,Body Wash,Beauty,Moisturizing body wash with natural ingredients.,12.99
+37,Vegan Alfredo Sauce,Food - Sauces,"Creamy, dairy-free Alfredo sauce",4.99
+38,Coconut Chips,Food - Snacks,"Crunchy, toasted coconut chips for snacking.",3.59
+39,Laptop Sleeve,Accessories,Padded laptop sleeve for protection against scratches.,24.99
+40,Electric Hot Pot,Kitchen,Compact electric pot for hot pot dining at home.,49.99
+41,Fashionable Scarves Set,Clothing,Stylish scarves to accessorize any outfit.,24.99
+42,Raspberry Lemonade Mix,Food - Beverages,"A refreshing drink mix that combines sweet raspberries and tart lemons, perfect for summer.",3.99
+43,Sports Water Bottle with Infuser,Fitness,Bottle that allows you to infuse your water with fruits.,19.99
+44,Foam Building Blocks for Kids,Toys,Soft foam blocks perfect for building and imaginative play.,22.99
+45,Cranberry Juice,Food - Beverages,Refreshing cranberry juice with no added sugar.,3.69
+46,Electric Screwdriver,Tools,Cordless electric screwdriver for home projects.,59.99
+47,Organic Brown Sugar,Food - Baking,Natural sweetener for baking and cooking.,2.49
+48,Pumpkin Spice Coffee,Food - Beverages,"Coffee blend infused with pumpkin spice, perfect for fall.",7.99
+49,Wireless Security Camera,Home,1080p wireless security camera with night vision.,109.99
+50,Folding Exercise Bike,Fitness,Space-saving bike for indoor workouts.,199.99
+51,Luminous Night Light,Home,Soft glow night light for children's rooms or bedside.,15.99
+52,Smoky BBQ Jackfruit,Food - Grocery,Pulled jackfruit in a smoky BBQ sauce for a tasty vegan dish.,4.99
+53,Nutritional Yeast,Food - Pantry,A healthy vegan cheese alternative packed with nutrients and flavor.,3.59
+54,Electric Kettle with Temperature Control,Kitchen,Electric kettle that offers precise temperature settings.,49.99
+55,Coconut Milk Ice Cream,Food - Frozen Desserts,"Dairy-free ice cream made with coconut milk, creamy and delicious.",6.99
+56,Classic Pesto Sauce,Food - Sauces,"Fresh basil pesto, perfect for pasta or as a sandwich spread.",4.29
+57,Outdoor Picnic Blanket,Outdoor,Water-resistant blanket for picnics and outdoor events.,34.99
+58,Savory Italian Herbs,Food - Spices,A blend of dried Italian herbs for cooking.,2.99
+59,Portable Solar Path Lights,Outdoor,Eco-friendly solar lights for pathways and gardens.,39.99
+60,Creamy Avocado Dip,Food - Snacks,"Rich and creamy dip made with real avocado, great for chips.",3.49
+61,Watercolor Brush Pens,Art Supplies,Set of brush pens for colorful and creative painting.,19.99
+62,Personalized Pet ID Tags,Pets,Custom engraved ID tags for pets with your contact information.,9.99
+63,Car Trash Can,Automotive,Compact trash can for keeping your car clean.,12.99
+64,Marinara Parmesan Baked Ziti,Food - Frozen Meals,Ziti pasta baked with marinara and parmesan cheese,8.49
+65,Cotton Tote Bag Set,Accessories,Reusable tote bags for shopping and eco-friendly living.,29.99
+66,Cold Brew Coffee Maker,Kitchen,Brews coffee with a smooth flavor without bitterness.,34.99
+67,Digital Wireless Camera,Home Security,Secure digital wireless security camera system.,199.99
+68,Pineapple Coconut Bars,Food - Snacks,Refreshing dessert bars made with pineapple and coconut.,3.79
+69,Chipotle Black Bean Salad,Food - Salads,"A zesty salad with black beans, corn, and chipotle dressing.",3.29
+70,Organic Green Lentils,Food - Grocery,"Nutty flavored lentils, perfect for soups and salads.",3.99
+71,Cheese Stuffed Jalapenos,Food - Snacks,"Spicy jalapenos stuffed with cheese, ideal for appetizers.",5.99
+72,Biodegradable Dog Waste Bags,Pets,Eco-friendly bags for picking up after your pet.,14.99
+73,Miso Soup Starter,Food - Soups,Miso paste for making traditional Japanese miso soup.,2.99
+74,Pineapple Teriyaki Chicken Mix,Food - Meat,A perfect blend of pineapple and teriyaki for stir-fry.,6.99
+75,Lentil Soup,Food - Canned Goods,"Flavorful lentil soup, perfect for a quick meal.",2.49
+76,Coconut Cream Pie,Food - Bakery,Delicious pie filled with coconut cream and topped with whipped cream.,9.49
+77,LED Strip Lights,Home,Colorful LED strip lights for home decoration.,19.99
+78,Magnetic Curtain Tiebacks,Home,Easy-to-use tiebacks for curtains or drapes.,12.99
+79,Pine Nuts,Food - Nuts,Nutty flavor perfect for pesto and salads.,7.99
+80,Hot Salsa,Food - Dips,Spicy salsa made with fresh ingredients.,2.29
+81,Frozen Hash Browns,Food - Frozen Foods,"Shredded potatoes, perfect for breakfasts.",2.99
+82,Maxi Wrap Dress,Clothing - Dresses,A flowy maxi dress perfect for both casual and semi-formal occasions.,49.99
+83,Honey Sesame Chicken,Food - Frozen Food,A delicious chicken dish featuring honey and sesame flavors.,8.99
+84,Siphon Coffee Maker,Kitchen,Unique coffee brewing method for a flavorful experience.,49.99
+85,Garden Tool Set with Carrying Bag,Garden,Complete set for garden care with a handy carrying bag.,39.99
+86,Portable Pet Stroller,Pets,Convenient stroller for pets to enjoy outdoor walks.,89.99
+87,Compact Refrigerator,Home Appliances,Mini refrigerator ideal for small spaces.,199.99
+88,Pet Activity Tracker,Pets,GPS collar that monitors your pet's location and activity level.,59.99
+89,Silicone Baking Cups,Kitchen,Set of reusable baking cups for muffins and cupcakes.,10.99
+90,Wireless Charging Pad,Accessories,Sleek wireless charging pad for smartphones.,19.99
+91,Baby Monitor,Baby,Video baby monitor with night vision.,79.99
+92,Digital Food Scale,Kitchen,Precision digital scale for accurate cooking measurements.,22.99
+93,Savory Trail Mix,Food - Snacks,"A blend of nuts, seeds, and spices for a healthy snack.",4.29
+94,Wireless HDMI Transmitter,Electronics,Stream HD video wirelessly to your TV.,79.99
+95,Tactical Backpack,Outdoor,Durable and versatile backpack for outdoor and travel use.,59.99
+96,Foot Massager,Health,Electric foot massager with heat settings.,79.99
+97,Cucumber Lime Sparkling Water,Food - Beverages,Refreshing sparkling water with cucumber and lime flavor.,1.49
+98,Portable Speaker Stand,Audio,Adjustable stand for portable speakers and devices.,39.99
+99,Cabbage,Food - Produce,"Fresh green cabbage, great for salads and slaws.",1.29
+100,Wild Rice & Quinoa Mix,Food - Grains,"Nutritious blend of wild rice and quinoa, perfect as a side dish.",2.99
+101,Honeycrisp Apples,Food - Produce,"Crisp and sweet Honeycrisp apples, freshly picked.",1.89
+102,Blueberry Muffin Mix,Food - Baking,Make delightful blueberry muffins at home with this easy mix.,4.29
+103,Cinnamon Sugar Tortilla Chips,Food - Snacks,"Crispy chips with a sweet twist, perfect for dipping.",3.29
+104,Spicy Avocado Salsa,Food - Condiments,"A zesty salsa made from ripe avocados, tomatoes, onions, and jalapeños, great for dipping or topping.",4.49
+105,Pumpkin Spice Cookies,Food - Bakery,Delicious cookies flavored with pumpkin and spices.,3.29
+106,Kids' STEM Robotics Kit,Toys,Educational robotics kit for building and programming.,59.99
+107,Bluetooth Tracker,Accessories,Smart tracker to locate keys or other items via app.,19.99
+108,Throw Pillow Covers,Home,Set of decorative pillow covers to enhance your home decor.,22.99
+109,Dried Fruit Medley,Food - Snacks,A delightful mix of dried fruits for trail mix or snacks.,5.49
+110,Wireless Car Charger,Automotive,Convenient charging pad for wireless charging in vehicles.,24.99
+111,LED Strip Light Kit,Home,Flexible light strips for creative home decor.,39.99
+112,Sweet Pea Hummus,Food - Dips,Creamy hummus made with sweet peas and tahini.,4.29
+113,Peanut Butter,Food - Condiments,"Creamy and smooth peanut butter, perfect for sandwiches.",3.79
+114,Almond Flour Brownies,Food - Baking,Deliciously rich brownies made with almond flour.,5.99
+115,Handmade Wooden Utensil Set,Kitchen,Unique handcrafted utensils for cooking and serving.,24.99
+116,Vegan Mayonnaise,Food - Condiments,Plant-based mayonnaise for a creamy taste.,4.49
+117,Lightweight Workout Tank,Clothing - Activewear,Breathable tank top perfect for workouts or casual wear.,29.99
+118,Gluten-Free Biscuits,Food - Baking,Fluffy biscuits made without gluten,3.79
+119,Classic White T-Shirt,Clothing - Tops,A timeless wardrobe staple crafted from soft cotton with a perfect fit.,19.99
+120,Cinnamon Sugar Donuts,Food - Bakery,Delicious mini donuts dusted with cinnamon sugar.,4.99
+121,Reversible Comforter Set,Home,Soft comforter set for a cozy bedroom look.,89.99
+122,Paprika,Food - Spices,Rich and sweet paprika spice for seasoning.,1.79
+123,Caraway Rye Bread,Food - Bakery,Artisan bread with caraway seeds for added flavor.,4.79
+124,Pet Caress Brush,Pets,Gentle brush for removing loose fur from pets.,12.99
+125,Comfortable Bed Pillow,Home,Supportive pillow designed for a good night's sleep.,24.99
+126,Fitness Resistance Bands Kit,Fitness,Set with various resistance bands for workouts.,29.99
+127,Artisan Flatbreads,Food - Bakery,"Thin and crispy flatbreads, perfect for dips.",2.99
+128,Vegetable Lasagna,Food - Frozen Foods,"Layers of pasta, veggies, and cheese baked to perfection.",6.99
+129,Smartphone Tripod,Photography,Adjustable tripod for smartphones and cameras.,29.99
+130,Handmade Soap Making Kit,Crafts,Complete kit for crafting your own scented soaps.,34.99
+131,Garden Vegetable Soup,Food - Canned Goods,"A hearty soup filled with vegetables and herbs, perfect for a light meal.",3.29
+132,Peanut Butter Protein Balls,Food - Snacks,No-bake energy bites made with peanut butter and oats.,5.29
+133,Steak Seasoning Rub,Food - Spices,A blend of spices perfect for seasoning steak.,2.49
+134,Organic Lentil Soup,Food - Soups,A hearty soup made with organic lentils and vegetables.,4.99
+135,Buffalo Cauliflower Bites,Food - Freezer,Spicy cauliflower bites for a vegetarian snack.,6.29
+136,Air Fryer Oven,Kitchen,"Versatile air fryer that also roasts, bakes, and broils.",149.99
+137,Vegan chocolate chip cookies,Food - Bakery,"Delicious soft cookies, dairy-free and egg-free, perfect for treats.",4.79
+138,Glass Food Containers,Kitchen,BPA-free glass containers for safe food storage.,34.99
+139,Coconut Curry Lentil Soup,Food - Canned Goods,"A hearty soup made with lentils, coconut milk, and a blend of spices for a tropical flavor.",3.99
+140,Measuring Cups Set,Kitchen,Stackable measuring cups made from stainless steel.,19.99
+141,Ice Cream Scoop,Kitchen,Durable scoop for perfectly shaped ice cream servings.,12.99
+142,Adjustable Stand for Tablets and Smartphones,Electronics,Multi-angle stand for easy viewing of devices.,19.99
+143,Pet Water Fountain with Filtration,Pets,"Continuous stream of fresh water for pets, promoting hydration.",39.99
+144,Car Emergency Kit,Automotive,Comprehensive emergency kit for roadside assistance.,49.99
+145,Garden Kneeler and Seat,Garden,Convertible kneeler and seat for gardening comfort.,39.99
+146,Essential Oils Diffuser Necklace,Health,Wearable diffuser for scenting your space and body.,19.99
+147,Magnetic Spice Containers,Kitchen,Set of magnetic jars for convenient spice organization.,24.99
+148,Green Smoothie Mix,Food - Beverages,A convenient powder mix combining greens and fruits for smoothies.,5.99
+149,Animal Paw Print Soap Dispenser,Home,Cute dispenser for bathrooms or kitchens featuring paw prints.,16.99
+150,Portable Pet Pooper Scooper,Pets,Compact scooper for easy waste clean-up during walks.,12.99
+151,Sports Bottle,Fitness,BPA-free sports bottle with flip-top lid.,15.99
+152,Karaoke Microphone,Music,Wireless microphone for singing and performances.,39.99
+153,Weighted Jump Rope with Counter,Fitness,Jump rope that counts your jumps for tracking workouts.,14.99
+154,Matcha Green Tea Powder,Food - Beverages,High-quality matcha for making traditional tea or lattes.,14.99
+155,Organic Granola Cereal,Food - Breakfast,Crunchy granola made with organic oats,5.99
+156,Personal Safety Alarm,Safety,Compact alarm for personal safety and security.,12.99
+157,Cotton Sweatpants,Clothing - Bottoms,Soft and breathable cotton sweatpants perfect for lounging or workouts.,29.99
+158,Nordic Berry Smoothie,Food - Frozen Foods,Frozen smoothie blend with berries for a quick and healthy breakfast.,3.99
+159,Oven Thermometer,Kitchen,High-precision oven thermometer for accurate cooking.,11.99
+160,Kids' Science Experiment Kit,Toys,Engaging kit with science experiments for children.,29.99
+161,Oven-Baked Chicken Tenders,Food - Meat,"Crispy and juicy chicken tenders, perfect for dipping.",6.99
+162,Baking Powder,Food - Baking Goods,Essential ingredient for baking fluffy cakes and pastries.,1.79
+163,Silicone Baking Molds,Kitchen,Set of flexible molds for baking cakes and pastries.,15.99
+164,Mango Chutney,Food - Condiments,Sweet and tangy mango chutney for a flavorful dip.,3.99
+165,Travel Document Organizer,Travel,"Organize travel documents, passport, and cards.",15.99
+166,Personal Blender with Cups,Kitchen,Compact blender that comes with travel cups for smoothies.,34.99
+167,Pet Safety Harness,Pets,Comfortable harness designed to keep pets safe in the car.,24.99
+168,Classic Baseball Cap,Clothing - Accessories,A timeless baseball cap that adds a sporty touch to any outfit.,24.99
+169,Pistachios,Food - Nuts,"Roasted pistachios, a healthy and tasty snack.",6.99
+170,Camping Chair with Cooler,Outdoor,Foldable chair equipped with a cooler pouch.,49.99
+171,Truffle Parmesan Fries,Food - Snacks,"Crispy fries tossed in truffle oil and parmesan, a gourmet snack.",4.99
+172,Basil Tomato Soup,Food - Canned Soups,"Rich tomato soup flavored with fresh basil, ready to heat up.",2.99
+173,Electric Skillet,Kitchen,Versatile electric skillet for stir-frying and searing.,49.99
+174,Smart Plug,Smart Home,Wi-Fi enabled plug for controlling devices from your smartphone.,19.99
+175,Buttermilk Pancakes,Food - Breakfast,Fluffy pancakes with buttermilk flavor.,3.99
+176,Zucchini Noodle Pasta,Food - Vegetables,"Low-carb zucchini noodles, perfect for a healthy alternative to pasta.",3.99
+177,Lemon Basil Pasta Sauce,Food - Sauces,A tangy sauce that combines lemon zest and basil for a refreshing flavor.,4.99
+178,Vegetable Korma,Food - Frozen,Creamy vegetable curry enriched with spices.,6.49
+179,Cinnamon Spiced Almonds,Food - Snacks,Crispy almonds coated with cinnamon and sugar for a sweet and crunchy snack.,5.99
+180,Stainless Steel Travel Mug,Kitchen,Insulated mug to keep drinks hot on the go.,19.99
+181,Chickpea Salad,Food - Prepared Foods,A ready-to-eat salad made with chickpeas and veggies.,5.49
+182,Multi-Purpose Scissors,Office,Heavy-duty scissors for crafting and office use.,8.99
+183,Smart WiFi Plug,Smart Home,Control appliances remotely using your smartphone.,19.99
+184,Portable Water Filter,Outdoor,Lightweight water filter for outdoor adventures.,29.99
+185,Lemon Sorbet,Food - Frozen Desserts,Refreshing sorbet with a zesty lemon flavor.,4.99
+186,Cranberry Lime Sparkling Water,Food - Beverages,Refreshing sparkling water infused with cranberry and lime flavors.,1.5
+187,Sliced Ham,Food - Meat,"Delicious and fully cooked sliced ham, ready to eat.",5.49
+188,Chipotle Seasoning Blend,Food - Spices,A smoky blend of spices for grilling and roasting.,2.49
+189,Classic Caesar Salad Kit,Food - Salads,Everything you need for a fresh and delicious Caesar salad.,4.99
+190,Honey Roasted Chickpeas,Food - Snacks,Crispy chickpeas roasted with honey for a sweet and satisfying snack.,3.29
+191,Maple Bacon Popcorn,Food - Snacks,Savory popcorn flavored with maple syrup and bacon bits.,3.49
+192,Pasta (Fusilli),Food - Pasta,Twisted pasta perfect for salads and pasta dishes.,1.79
+193,Adjustable Skipping Rope,Fitness,Durable skipping rope with adjustable length for workouts.,12.99
+194,Orange Ginger Vinaigrette,Food - Condiments,Tangy vinaigrette with orange and ginger flavors.,3.99
+195,Mini Food Processor,Kitchen,Compact food processor for quick meal prep.,39.99
+196,Vegetable Stock,Food - Cooking Essentials,Rich vegetable stock for cooking soups and stews.,2.49
+197,Foldable Electric Scooter,Outdoor,Compact electric scooter for commuting and short trips.,349.99
+198,Hand Mixer,Kitchen,Compact hand mixer for easy baking.,29.99
+199,Vegan Mac & Cheese,Food - Frozen,Creamy vegan mac and cheese made with cashew cheese.,8.99
+200,Beard Grooming Kit,Grooming,Everything you need for maintaining a healthy beard.,34.99
+201,Mango Chia Pudding,Food - Snacks,Healthy chia pudding made with mango and coconut milk.,4.49
+202,Sliced Turkey Breast,Food - Deli Meats,"Oven-roasted sliced turkey, perfect for sandwiches.",5.49
+203,Chili Garlic Sauce,Food - Condiments,"Spicy sauce made with chili peppers and garlic, great for stir-frying.",2.49
+204,LED Desk Lamp,Home,Dimmable LED desk lamp with USB charging port.,35.0
+205,Cinnamon Sugar Mix,Food - Baking,Sweet mixture of cinnamon and sugar for sprinkling.,1.49
+206,Digital Drawing Tablet,Art Supplies,Tablet for digital drawing and illustration work.,79.99
+207,Roasted Vegetable Medley,Food - Frozen Foods,A mix of frozen roasted vegetables for an easy side dish.,3.99
+208,Chickpea Pancakes,Food - Frozen,"Savory pancakes made with chickpea flour, high in protein.",4.99
+209,Art Supplies Organizer,Art Supplies,Storage organizer for art supplies and tools.,18.99
+210,Whole Roasted Chicken,Food - Meats,"Seasoned and roasted to perfection, ready to eat.",9.99
+211,Professional Chef Knife,Kitchen,High-carbon stainless steel chef knife for precision cutting.,89.99
+212,Phone Case,Accessories,Rugged phone case for drop protection.,14.99
+213,Drone,Electronics,Beginner-friendly drone with HD camera.,249.99
+214,Satin Slip Dress,Clothing - Dresses,Luxurious satin slip dress for an elegant evening look.,59.99
+215,Smartphone Camera Lens Kit,Photography,Upgrade your phone photography with this lens kit that includes wide-angle and macro lenses.,19.99
+216,Avocado Oil,Food - Oils,"A healthy oil extracted from avocados, ideal for frying and salads.",8.49
+217,Magnetic Whiteboard,Office,Reusable whiteboard for notes and reminders with magnetic backing.,34.99
+218,Pet Training Pads,Pets,Absorbent training pads for puppies and kittens.,24.99
+219,Honey Mustard Pretzel Bites,Food - Snacks,"Delicious pretzel bites with a sweet honey mustard flavor, perfect for dipping.",3.99
+220,Natural Fruit Snacks,Food - Snacks,"Healthy fruit snacks, made with real fruit.",3.99
+221,Asian Noodle Salad Kit,Food - Salads,A pre-packaged salad kit with noodles and Asian-style dressing.,4.99
+222,Creative Puzzle Game,Toys,Challenging and fun puzzle game for all ages.,19.99
+223,Chocolate Chip Cliff Bars,Food - Snacks,Nutritious energy bars packed with chocolate chips.,2.49
+224,Wooden Toy Train Set,Toys,Classic wooden train set for imaginative play.,29.99
+225,Mobile Workbench,Tools,Sturdy mobile workbench with storage options.,199.99
+226,Peach Salsa,Food - Dips,Sweet and spicy salsa made with fresh peaches.,3.29
+227,Travel Luggage Scale,Travel,Digital scale to avoid overweight baggage fees.,14.99
+228,Foldable Yoga Mat,Fitness,Compact yoga mat that folds for easy storage and transport.,29.99
+229,Raspberry Limeade,Food - Beverages,Sweet and tangy raspberry lime beverage,1.99
+230,Coconut Flakes,Food - Baking,Unsweetened coconut flakes for baking and topping.,3.29
+231,Organic Blueberries,Food - Fruits,Fresh organic blueberries perfect for snacking or baking.,5.49
+232,Outdoor Sports Backpack,Outdoor,Durable backpack designed for hiking and outdoor excursions.,49.99
+233,Foam Roller for Muscle Recovery,Fitness,Use this foam roller for effective post-workout recovery.,29.99
+234,Trendy Bomber Jacket,Clothing - Outerwear,A fashion-forward bomber jacket to elevate your casual looks.,69.99
+235,Almond Flour Tortillas,Food - Baking & Cooking,"Gluten-free tortillas made from almond flour, perfect for various wraps and meals.",4.99
+236,Water-Resistant Bluetooth Speaker,Audio,Durable speaker designed for outdoor use with water resistance.,59.99
+237,Smart Air Purifier,Home,Filters allergens and pollutants from the air for a healthier home.,199.99
+238,Blackberry Jam,Food - Condiments,Delicious homemade style blackberry jam.,4.29
+239,Coconut Curry Chicken,Food - Frozen Foods,"Tender chicken cooked in a rich coconut curry sauce, ready to heat and serve.",9.99
+240,Fruit and Nut Energy Bites,Food - Snacks,Natural energy bites packed with fruits and nuts for a perfect snack.,2.99
+241,Baking Soda,Food - Baking,Essential ingredient for baking and cooking.,0.99
+242,Solar Garden Lights,Outdoor,Energy-efficient lights that charge during the day and illuminate at night.,39.99
+243,Rice Noodles,Food - Grains,"Thin rice noodles, ideal for stir-fries and soups.",3.49
+244,Travel Eye Mask with Ear Plugs,Travel,Comfortable eye mask that includes noise-canceling ear plugs.,15.99
+245,Microfiber Cleaning Cloth Set,Home,Assorted cloths for cleaning electronics and delicate surfaces.,9.99
+246,Himalayan Pink Salt,Food - Condiments,"Natural mineral salt with a subtle flavor, ideal for cooking and seasoning.",1.99
+247,Portable Hammock,Outdoor,Lightweight hammock for easy setup anywhere.,27.99
+248,Sketchbook,Art Supplies,High-quality sketchbook for artists.,14.99
+249,Salt and Pepper Grinder Set,Kitchen,Adjustable grinders for fresh spices at the table.,19.99
+250,Butternut Squash Soup,Food - Soups,"Creamy and delicious soup made with real butternut squash, ready to heat.",3.49
+251,Organic Quinoa Salad,Food - Prepared Meals,A refreshing salad made with quinoa and seasonal veggies.,5.99
+252,Waterproof Rain Boots,Clothing - Footwear,Stay dry with these stylish waterproof rain boots.,69.99
+253,Classic Beef Chili,Food - Canned Goods,Hearty chili made with premium ground beef and kidney beans.,7.99
+254,Travel Pillow,Travel,Memory foam travel pillow for neck support.,22.99
+255,Yoga Strap,Fitness,Durable yoga strap for deeper stretches.,12.99
+256,Bamboo Toothbrush,Health,Eco-friendly bamboo toothbrush for sustainable living.,5.99
+257,Organic Black Rice,Food - Grains,"Nutty and chewy black rice, high in antioxidants.",3.59
+258,Foot Spa Bath Massager,Health,Relax and soothe tired feet with this foot spa.,59.99
+259,Honey Mustard Sauce,Food - Condiments,Creamy honey mustard sauce for dipping or dressing.,3.29
+260,LED Flashlight with Rechargeable Batteries,Outdoor,Bright flashlight with rechargeable batteries included.,19.99
+261,Under Desk Footrest,Office,Adjustable footrest for improved comfort while sitting.,29.99
+262,Bluetooth Sleep Headphones,Audio,Comfortable wireless headphones designed for sleeping.,29.99
+263,Peanut Butter Chocolate Chip Bars,Food - Snacks,Chewy bars made with peanut butter and chocolate chips.,4.59
+264,Garlic Butter Shrimp,Food - Seafood,"Frozen shrimp sautéed in garlic butter, ready to thaw and serve over pasta or rice.",8.99
+265,Classic Vanilla Fudge,Food - Desserts,"Creamy vanilla fudge, a sweet treat for all occasions.",4.49
+266,Chia Seeds,Food - Grains,"Nutty flavored chia seeds, packed with nutrients.",6.99
+267,Cinnamon Raisin Bagels,Food - Bakery,Soft bagels flavored with cinnamon and raisins.,4.19
+268,Smart Light Switch,Smart Home,Control lights remotely with this smart switch.,29.99
+269,Video Camera,Electronics,1080p HD video camera with night vision.,199.0
+270,Mini Air Purifier,Health,Battery-operated air purifier for small spaces.,49.99
+271,Pepper Jack Cheese Sticks,Food - Snacks,"A spicy, flavorful cheese stick great for snacks or lunchboxes.",2.49
+272,White Rice,Food - Grains,"Plain white rice, a staple for any meal.",1.49
+273,Garlic Butter Sauce,Food - Condiments,A rich sauce perfect for pasta or drizzling over vegetables.,3.59
+274,Ethically-Sourced Coffee Beans,Food - Beverages,Freshly roasted coffee beans with rich flavor.,9.99
+275,Vegetarian Pizza,Food - Frozen Foods,Frozen pizza loaded with vegetables and cheese.,5.49
+276,Portable Solar Charger,Electronics,Solar-powered charger for smartphones and tablets.,29.99
+277,Hummus Variety Pack,Food - Dairy,"A selection of different flavored hummus, great for snacking.",5.99
+278,Rainbow Veggie Chips,Food - Snacks,"Colorful veggie chips made from beets, carrots, and sweet potatoes.",3.29
+279,Outdoor Camping Hammock,Outdoor,Lightweight and durable hammock for relaxing in nature.,29.99
+280,Pet Grooming Brush,Pets,Self-cleaning grooming brush for cats and dogs.,19.99
+281,Camera Tripod,Photography,Sturdy camera tripod for professional photography.,49.99
+282,Dog Training Collar,Pets,Rechargeable training collar for effective behavior training.,39.99
+283,Caribbean Jerk Marinade,Food - Marinades,A spicy marinade perfect for chicken and fish.,3.79
+284,Feta Cheese Crumbles,Food - Dairy,"Crumbled feta cheese, perfect for salads and Mediterranean dishes.",2.49
+285,Classic Cheeseburger Mix,Food - Meats,"All-in-one mix for easy homemade cheeseburgers, just add ground beef.",5.49
+286,Kids' Art Easel,Toys,Double-sided art easel for painting and drawing.,58.99
+287,Portable Ice Maker,Kitchen,Compact ice maker for creating ice at home or in offices.,199.99
+288,Brazil Nuts,Food - Nuts,"Rich in selenium, perfect for snacking or baking.",10.99
+289,Cat Scratching Post with Toys,Pets,Multi-level scratching post to keep your cat entertained.,44.99
+290,Multi-Functional Rice Cooker,Kitchen,Electric rice cooker with multiple cooking settings for perfect rice.,49.99
+291,Faux Fur Coat,Clothing - Coats,A luxurious faux fur coat that adds glamour to any outfit.,129.99
+292,Sweet Chili Dipping Sauce,Food - Condiments,A sweet and spicy sauce ideal for spring rolls or chicken nuggets.,2.99
+293,Whole Wheat Pita Bread,Food - Bread,"Soft and fluffy whole wheat pita bread, great for wraps.",2.79
+294,Organic Coconut Water,Food - Beverages,Refreshing coconut water packed with electrolytes for hydration.,2.79
+295,Apple Cinnamon Oatmeal,Food - Breakfast,Warm oatmeal flavored with apple and cinnamon.,2.89
+296,Kids' Trampoline,Toys,Safe and fun trampoline for children.,139.99
+297,Tropical Fruit Bowl,Food - Snacks,A mix of tropical fruits for a refreshing snack or dessert.,4.99
+298,Organic Tomato Soup,Food - Canned Goods,Hearty tomato soup made from organic ingredients.,3.79
+299,Warm Wool Sweater,Clothing - Tops,Cozy wool sweater to keep you warm on chilly days.,59.99
+300,Nature Explorer Lens Kit,Toys,Magical lens kit for kids to explore the outdoors.,19.99
+301,Maple Cinnamon Granola Bars,Food - Snacks,Chewy granola bars with maple and cinnamon flavor.,3.49
+302,Beef Stew Meat,Food - Meat,Tender beef chunks for slow-cooked stews.,5.99
+303,Electric Heat Pad,Health,Microwaveable heat pad for soothing muscle aches.,24.99
+304,Spinach and Ricotta Ravioli,Food - Pasta,Delicious ravioli filled with creamy ricotta and fresh spinach.,6.49
+305,Electric Meat Grinder,Kitchen,Powerful grinder for making sausage and burgers at home.,89.99
+306,Pesto Pasta Salad,Food - Prepared Foods,Cold pasta salad tossed with pesto and fresh vegetables.,4.99
+307,Collapsible Colander,Kitchen,Space-saving colander for rinsing fruits and vegetables.,14.99
+308,Quinoa Salad,Food - Prepared Foods,"A nutritious quinoa salad with veggies and dressing, ready-to-eat.",5.99
+309,Vanilla Protein Powder,Food - Health/Protein,A high-quality protein powder perfect for smoothies and baking.,24.99
+310,Oats,Food - Grains,"Organic rolled oats, great for breakfast or baking.",3.29
+311,Low-Fat Cottage Cheese,Food - Dairy,"Creamy cottage cheese, perfect for healthy snacking.",2.99
+312,Samsung Galaxy Smartwatch,Wearable Tech,Stylish smartwatch with fitness tracking and notifications.,249.99
+313,Vegetable Stir Fry Mix,Food - Fresh Produce,A mix of fresh vegetables for quick stir-fries.,3.29
+314,Black Olives,Food - Canned Goods,"Sliced black olives, perfect for salads and pizzas.",1.99
+315,Outdoor Portable Fire Pit,Outdoor,Compact fire pit for campfires and gatherings.,149.99
+316,Solar Power Bank,Electronics,Eco-friendly power bank that charges via sunlight.,39.99
+317,LED Strip Lights with Remote Control,Home,Color-changing LED lights for home decoration with remote.,29.99
+318,Portable USB-C Monitor,Electronics,Lightweight and slim monitor ideal for dual-screen setups.,199.99
+319,Self-Inflating Camping Mattress,Outdoor,Comfortable camping mattress that inflates automatically.,49.99
+320,Cordless Water Flosser,Health,Rechargeable water flosser for dental hygiene.,49.99
+321,Dog Training Whistle,Pets,High-frequency whistle for training your dog effectively.,8.99
+322,Organic Black Beans,Food - Canned Goods,"Versatile canned black beans, ready to add to any dish.",1.29
+323,Garlic and Herb Cream Cheese,Food - Dairy,Spreadable cream cheese with garlic and herbs.,3.49
+324,Himalayan Salt Grinder,Food - Spices,"Natural pink salt, perfect for seasoning.",4.99
+325,Streaming Device,Electronics,HD streaming device for accessing popular services.,49.99
+326,Coconut Almond Granola,Food - Breakfast,"Crunchy granola made with oats, almonds, and coconut flakes.",4.99
+327,Rechargeable Battery Organizer,Home,Tidy storage solution for rechargeable batteries.,17.99
+328,Peas (frozen),Food - Frozen Foods,"Frozen green peas, a great addition to meals.",1.89
+329,Multifunctional Baby Bottle Warmer,Baby,Warmer for heating baby bottles and food jars.,39.99
+330,Bird Feeder,Outdoor,Hanging bird feeder for backyard birds.,24.99
+331,Pumpkin Seeds,Food - Snacks,"Crunchy roasted pumpkin seeds, great for snacking.",2.79
+332,Spicy Thai Chili Sauce,Food - Sauces,A sweet and spicy sauce for dipping or cooking.,3.29
+333,Folding Table,Outdoor,Portable folding table for outdoor events.,59.99
+334,Coconut Rice,Food - Frozen,Fluffy rice cooked with coconut milk for a tropical twist.,2.29
+335,Mini Indoor Herb Garden Kit,Garden,All-in-one kit for growing herbs in your kitchen.,24.99
+336,Buffalo Sauce,Food - Condiments,Spicy buffalo sauce ideal for wings or dipping.,2.99
+337,Smart Home Security Camera,Smart Home,Wi-Fi camera with motion detection for home security.,79.99
+338,Caramelized Onion Dip Mix,Food - Snacks,A mix to create a delicious onion dip for parties or snacking.,2.29
+339,Overnight Duffle Bag,Travel,Spacious duffle bag for weekend getaways.,34.99
+340,Almond Joy Bars,Food - Confectionery,Chocolate-covered candy bars with coconut and almonds.,1.29
+341,Electric Knife,Kitchen,Cordless electric knife for effortless slicing.,39.99
+342,Organic Almonds,Food - Nuts,"Crunchy and nutritious almonds, perfect for snacking.",8.99
+343,Fashionable Fanny Pack,Clothing - Accessories,"A trendy fanny pack, perfect for hands-free outings.",24.99
+344,Chipotle Sauce,Food - Condiments,Spicy sauce made with chipotle peppers,3.29
+345,Spaghetti Squash,Food - Produce,Low-carb vegetable for pasta alternatives.,3.99
+346,Almond Joy Snack Bars,Food - Snacks,Chewy snack bars with coconut and almonds coated in chocolate.,2.99
+347,Wine Glasses,Home,Set of elegant wine glasses for special occasions.,29.99
+348,Frozen Acai Purée,Food - Frozen,Unsweetened frozen acai purée for smoothies and bowls.,6.99
+349,Pasta Salad Kit,Food - Prepared Foods,All-in-one kit for making pasta salad easily.,5.99
+350,Wireless Mouse,Electronics,Ergonomic wireless mouse with adjustable DPI.,25.99
+351,Peanut Butter Chocolate Clusters,Food - Desserts,Delicious clusters of peanuts and chocolate for a sweet treat.,2.99
+352,Organic Whole Wheat Flour,Food - Baking Goods,High-quality whole wheat flour for baking and cooking.,2.99
+353,Trainers with Mesh Inserts,Clothing - Footwear,Comfortable trainers with mesh inserts for breathability.,69.99
+354,Chilli Lime Corn on the Cob,Food - Vegetable,Corn on the cob seasoned with chili and lime for a spicy kick.,1.99
+355,Tahini,Food - Condiments,Creamy tahini made from ground sesame seeds.,5.49
+356,Vegetable Pizza Rolls,Food - Frozen Foods,"Frozen pizza rolls filled with vegetables and cheese, perfect for snacks.",6.49
+357,Silicone Baking Mats,Kitchen,Reusable silicone mats for non-stick baking.,19.99
+358,Air Mattress,Outdoor,Inflatable air mattress for convenient sleeping.,49.99
+359,Cable Knit Cardigan,Clothing - Outerwear,Cozy cable knit cardigan to layer during chilly evenings.,49.99
+360,Electric Bike,Bicycles,Eco-friendly electric bike with a 30-mile range.,899.99
+361,Honey Nut Cheerios,Food - Cereal,Classic cereal made with whole grains and honey.,4.29
+362,Kid's Fruit Snacks,Food - Snacks,Assorted fruit-flavored gummy snacks that kids love.,2.49
+363,Smartphone Stand,Accessories,Adjustable stand for smartphones and tablets.,15.49
+364,Travel Pillow with Memory Foam,Travel,Ergonomically designed neck pillow for comfortable travel.,29.99
+365,Pet Waterer with Filtration,Pets,Automatic waterer that filters and provides fresh drinking water for pets.,39.99
+366,Kale Salad with Lemon Dressing,Food - Salads,"Fresh kale salad with a zesty lemon dressing, great as a side dish.",4.99
+367,Vegetable and Cheese Quesadillas,Food - Frozen,Flour tortilla filled with cheese and a medley of vegetables.,6.99
+368,Kitchen Scale,Kitchen,Digital scale for precise cooking measurements.,19.99
+369,Canvas High-Top Sneakers,Clothing - Footwear,Trendy high-top canvas sneakers for a stylish streetwear look.,49.99
+370,Sun-Dried Tomatoes,Food - Vegetables,Dried tomatoes packed with deep flavor for salads and pasta.,3.99
+371,Collapsible Pet Dog Bowl,Pets,Travel-friendly dog bowl that is collapsible for easy storage.,9.99
+372,Dish Rack,Kitchen,Collapsible dish rack for kitchen countertop use.,24.99
+373,Wireless Range Extender,Electronics,Boost your Wi-Fi signal for better coverage.,49.99
+374,Peach Mango Smoothie Mix,Food - Beverages,A blend of peach and mango for a tropical smoothie.,5.99
+375,Beef Sirloin Steak,Food - Meat,"Juicy and tender beef sirloin steak, grass-fed.",15.99
+376,Teriyaki Chicken Wings,Food - Frozen Food,Flavorful chicken wings marinated in a sweet teriyaki glaze.,10.99
+377,Sweet Corn,Food - Canned Goods,"Tender sweet corn kernels, ready to eat or add to dishes.",1.5
+378,Folding Backpack Chair,Outdoor,Versatile chair that easily folds up for carrying.,49.99
+379,Vegetable Chips,Food - Snacks,Crispy and crunchy snack made from assorted vegetables.,3.99
+380,Sea Salt Tortilla Chips,Food - Snacks,"Crunchy tortilla chips with a hint of sea salt, great with dips.",2.49
+381,Adjustable Yoga Mat Strap,Fitness,Convenient strap for carrying yoga mats to class.,14.99
+382,Lentil Vegetable Stew,Food - Canned Soups,"Hearty stew made with lentils and mixed vegetables, vegan-friendly.",4.49
+383,Children's Backpack,Accessories,Stylish and functional backpack for school or trips.,29.99
+384,Underwater Camera,Photography,Waterproof camera for capturing underwater adventures.,199.99
+385,Guitar Tuner,Music,Clip-on guitar tuner with LCD display.,19.99
+386,Pumpkin Spice Granola,Food - Breakfast,Crunchy granola with pumpkin spice flavor.,4.99
+387,Frozen Acai Bowl,Food - Frozen Foods,Healthy frozen acai bowl with toppings.,6.49
+388,Safety Goggles,Safety,Protective goggles for DIY and construction work.,14.99
+389,Wireless Gaming Headset,Gaming,Comfortable headset with surround sound for immersive gaming.,89.99
+390,Red Lentils,Food - Grains,Nutritious and quick-cooking red lentils.,1.99
+391,Watercolor Paint Set,Art Supplies,Vibrant watercolor paints that come with brushes and palettes.,19.99
+392,Applewood Smoked Bacon,Food - Meat,Delicious bacon with a rich applewood smoked flavor.,6.99
+393,LED Camping Lantern with USB Charging,Outdoor,Rechargeable lantern with multiple brightness settings for outdoors.,34.99
+394,Chocolate Almond Milk,Food - Dairy Alternatives,Rich and creamy almond milk with a hint of chocolate.,2.79
+395,Fitness Foam Roller,Fitness,High-density foam roller for muscle recovery.,29.99
+396,Classic Pumps,Clothing - Footwear,Elegant classic pumps that add sophistication to any outfit.,64.99
+397,Portable Massage Gun,Health,Personal massager for muscle recovery.,79.99
+398,Portable Hammock with Stand,Outdoor,Lightweight hammock with a sturdy stand for relaxation anywhere.,69.99
+399,Baked Falafel,Food - Vegetarian,"Crispy baked falafel balls, perfect for salads",5.49
+400,Smart Light Bulbs,Smart Home,Color-changing smart LED bulbs compatible with Alexa.,34.99
+401,Energy Protein Bars,Food - Snacks,Nutritious bars packed with protein for energy,2.29
+402,Decorative Wall Tapestry,Home,Colorful tapestry to add charm to any room.,34.99
+403,Raspberry Tart,Food - Baked Goods,A delicious tart filled with fresh raspberry filling.,5.49
+404,Set of Silicone Baking Molds,Kitchen,Flexible molds perfect for baking cakes and pastries.,15.99
+405,Chocolate Covered Pretzels,Food - Snacks,"Crunchy pretzels coated in rich chocolate, a sweet treat.",3.29
+406,Savory Quinoa Pudding,Food - Sides,"A delicious savory quinoa pudding, great as a side dish.",2.99
+407,Home Delivery Food Journal,Health,Track your meals and nutrition with this handy food journal.,14.99
+408,Fitness Resistance Bands Set,Fitness,Variety of bands suitable for all fitness levels.,34.99
+409,Organic Coconut Yogurt,Food - Dairy,Dairy-free yogurt made from coconut milk.,4.49
+410,Vegetable Stir-Fry Sauce,Food - Sauces,Savory sauce for vegetable and meat stir-fries.,3.49
+411,Basketball,Sports,Official size basketball for indoor and outdoor play.,29.99
+412,Pomegranate Juice,Food - Beverages,"Fresh pomegranate juice, rich in antioxidants.",4.49
+413,Apple Cinnamon Breakfast Muffins,Food - Bakery,Delicious muffins filled with apples and a hint of cinnamon for breakfast.,3.49
+414,Tennis Racket,Fitness,Lightweight tennis racket for beginners and advanced players.,89.99
+415,Chocolate Hazelnut Granola,Food - Cereal,Crunchy granola with chocolate and hazelnuts for breakfast.,4.49
+416,Electric Toothbrush,Health,Rechargeable electric toothbrush with smart timer.,49.95
+417,Striped Long Sleeve Shirt,Clothing - Shirts,A casual striped long sleeve shirt that's perfect for layering.,29.99
+418,Honey mustard chicken tenders,Food - Meat,Golden crispy chicken tenders coated with honey mustard flavor.,7.99
+419,Travel Orthopedic Pillow,Travel,Supportive pillow that provides comfort while traveling.,24.99
+420,Couscous Mix,Food - Grains,"Fluffy couscous that cooks in just minutes, perfect as a side.",2.49
+421,Fall-Themed Table Runner,Home,Decorative table runner perfect for autumn gatherings.,19.99
+422,Honey Glazed Carrots,Food - Produce,"Sweet and savory carrots glazed in honey, perfect as a side dish.",3.49
+423,Children's Educational Workbook,Books,Activity workbook for early learning and fun.,12.99
+424,Laptop Stand,Accessories,Adjustable laptop stand for better ergonomics.,29.99
+425,Self-Watering Planters,Garden,Planters with a self-watering feature for easy care.,49.99
+426,Whole Chicken,Food - Meat,"A whole free-range chicken, ready for roasting.",12.99
+427,Garlic Parmesan Wings,Food - Frozen Foods,Frozen chicken wings with garlic parmesan sauce.,8.99
+428,Ready-to-Eat Chili,Food - Soups,"Spicy chili in a can, ready to eat for a filling meal.",2.99
+429,Home Cleaning Robot,Home Appliances,Automated cleaning robot for hassle-free home maintenance.,249.99
+430,Almond Butter Cookies,Food - Snacks,Soft cookies made with almond butter,4.49
+431,Home Office Chair,Furniture,Ergonomic office chair with lumbar support and adjustable height.,199.99
+432,Yoga Mat,Fitness,Non-slip yoga mat for optimal grip and comfort.,25.0
+433,Compact Hair Dryer,Beauty,Lightweight hair dryer with multiple speed settings.,29.99
+434,Spicy Snack Mix,Food - Snacks,A crunchy blend of nuts and pretzels with a spicy kick.,4.99
+435,Portable Dog Water Bottle,Pets,Convenient water bottle for pets on the go.,18.99
+436,Classic Slim Fit Shirt,Clothing - Shirts,A tailored slim fit shirt for a polished look at work.,49.99
+437,Pet Bed with Removable Cover,Pets,Comfy pet bed with washable cover for easy cleaning.,49.99
+438,Self-Massaging Pillow,Health,Comfortable pillow with built-in massage features.,49.99
+439,Toy Building Set,Toys,Creative building set for kids to spark imagination.,29.99
+440,Fitness Smartwatch,Wearable Tech,Multifunctional smartwatch for fitness tracking.,99.99
+441,Flavored Rice Cakes,Food - Snacks,Light and crunchy rice cakes with a variety of flavors.,2.49
+442,Organic Baby Carrots,Food - Fresh Produce,Fresh and crunchy baby carrots ready for snacking.,2.99
+443,Scent Diffuser,Home,Ultrasonic essential oil diffuser with LED lights.,34.99
+444,Herbed Couscous,Food - Grains,Quick-cooking couscous flavored with herbs and spices.,2.49
+445,Soft Plush Throw Blanket,Home,Cozy throw blanket perfect for chilly evenings.,29.99
+446,Traditional Hummus,Food - Dips,Creamy chickpea dip blended with tahini and garlic.,3.29
+447,Mango Chilli Sauce,Food - Condiments,A sweet and spicy sauce for dipping or glazing.,3.99
+448,Fishing Tackle Box,Outdoor,Organized tackle box for fishing gear.,24.99
+449,Stylish Combat Boots,Clothing - Shoes,Bold combat boots that make a statement with any outfit.,99.99
+450,Mini Meatballs,Food - Frozen Meals,Frozen mini meatballs that are great as a snack or in pasta dishes.,5.99
+451,Glass Water Bottle,Fitness,Borosilicate glass water bottle with silicone sleeve.,25.99
+452,Almond Flour Pizza Crust,Food - Frozen Foods,"Low-carb pizza crust made from almond flour, gluten-free.",7.99
+453,Window Blinds,Home,Adjustable window blinds for privacy and light control.,59.99
+454,Chunky Knit Sweater,Clothing - Tops,Cozy oversized sweater perfect for chilly days with a textured knit design.,59.99
+455,Toilet Paper (12 rolls),Food - Household,Soft and strong toilet paper for everyday use.,8.99
+456,Vegetable Sushi Rolls,Food - Prepared Meals,Fresh sushi rolls filled with a variety of vegetables.,5.99
+457,Infrared Space Heater,Home Appliances,Energy-efficient infrared heater for home use.,99.99
+458,Garlic Herb Cream Cheese,Food - Dairy,Spreadable cream cheese blended with garlic and herbs.,2.99
+459,Maple Almond Yogurt,Food - Dairy,Creamy yogurt made with maple and almond flavors.,1.89
+460,Linen Trousers,Clothing - Bottoms,Breathable linen trousers perfect for hot weather.,44.99
+461,Sriracha Sauce,Food - Condiments,Spicy chili sauce for an extra kick in your meals.,3.19
+462,Pet Carrier Backpack,Pets,Comfortable and breathable backpack for carrying small pets.,39.99
+463,Sesame Ginger Dressing,Food - Condiments,"Tangy dressing perfect for salads and marinades, with sesame and ginger flavors.",4.09
+464,Outdoor String Lights,Outdoor,Fairy lights perfect for decorating patios and backyards.,24.99
+465,Vegetarian Sausage Links,Food - Meat Substitutes,Plant-based sausage links with spices and herbs.,5.89
+466,Protein Bar Variety Pack,Food - Snacks,A pack of assorted nut and protein bars for a quick energy boost.,12.99
+467,Sour Cream,Food - Dairy,"Tangy sour cream, perfect for dips and toppings.",3.49
+468,Wildflower Honey,Food - Condiments,Natural honey sourced from wildflowers.,4.99
+469,Magnetic Phone Car Mount,Automotive,Strong magnetic holder for smartphones in cars.,14.99
+470,Non-Stick Crepe Pan,Kitchen,Perfectly designed pan for making crepes and pancakes.,29.99
+471,Sweet Chili Thai Sauce,Food - Condiments,Tangy sweet chili sauce perfect for dipping or cooking.,3.49
+472,Fitness Tracker with Heart Rate Monitor,Fitness,Wearable device to track fitness activities and heart rate.,59.99
+473,Personal Security Alarm Keychain,Safety,Handy keychain that emits a loud alarm for personal safety.,10.99
+474,Herb Seasoned Rice,Food - Sides,A flavorful rice side dish seasoned with herbs and spices.,2.99
+475,Electric Griddle,Kitchen,Large electric griddle for family meals.,54.99
+476,Sweet Potatoes,Food - Produce,"Sweet and nutritious potatoes, great for roasting.",0.89
+477,Digital Wireless Meat Thermometer,Kitchen,Bluetooth thermometer that alerts you when your meat is done.,39.99
+478,Sporty Leggings,Clothing - Activewear,Functional leggings designed for maximum comfort during workouts.,39.99
+479,Knitted Infinity Scarf,Clothing - Accessories,A warm knitted scarf to keep you cozy in winter.,29.99
+480,Screen Cleaning Kit,Electronics,Safe cleaning solution and tools for electronics screens.,15.99
+481,Manual Coffee Grinder,Kitchen,Compact coffee grinder for fresh ground coffee beans.,22.99
+482,Cacao Nibs,Food - Baking,"Crunchy cacao nibs, great for adding to smoothies or baking.",6.49
+483,Luxury Yoga Mat,Fitness,"High-density, non-slip yoga mat for stability and comfort.",39.99
+484,V-Neck Sweater,Clothing - Tops,Classic V-neck sweater crafted from soft wool for warmth and style.,49.99
+485,Tomato Paste,Food - Canned Goods,"Concentrated tomato paste, great for sauces.",1.29
+486,Organic Cereal Bars,Food - Snacks,Healthy snack bars packed with oats and fruit.,4.29
+487,Glass Tea Pot,Kitchen,Elegant glass teapot for brewing loose tea.,34.99
+488,Stainless Steel Cutlery Set,Kitchen,High-quality cutlery set for daily use or special occasions.,29.99
+489,Gluten-Free Pancake Mix,Food - Baking Goods,"Fluffy and delicious pancake mix, perfect for a gluten-free breakfast.",5.99
+490,Rain Jacket,Clothing,Waterproof rain jacket with adjustable hood.,64.99
+491,Tailgating Set,Outdoor,Complete set for grilling and tailgating fun.,89.99
+492,LED Disco Ball Light,Home,Fun light that creates a disco atmosphere for parties.,19.99
+493,Spicy Thai Coconut Soup,Food - Soups,"A ready-to-eat soup with coconut milk, spices, and vegetables.",3.99
+494,Adjustable Pet Feeder,Pets,Convenient feeder that adjusts to your pet's height.,39.99
+495,Thai Red Curry Paste,Food - Condiments,Spicy and flavorful curry paste for authentic Thai dishes.,3.99
+496,Egg Noodles,Food - Grains,"Wide egg noodles, perfect for casseroles and soups.",2.29
+497,Portable Camping Stove,Outdoor,Compact camp stove for outdoor cooking.,49.99
+498,Wireless HDMI Receiver,Electronics,Stream HD video wirelessly from devices to TV.,49.99
+499,Magnetic Spice Jars,Kitchen,Convenient magnetic jars for easy spice storage.,24.99
+500,Coffee Maker,Kitchen,Single-serve coffee maker with a built-in grinder.,89.99
+501,Electric Wax Warmer,Home,Wax warmer for creating a soothing atmosphere with fragrances.,22.99
+502,Stick Vacuums Cleaner,Home Appliances,Cordless vacuum cleaner for quick clean-ups.,129.99
+503,Pet Hair Vacuum Attachment,Pets,Special attachment for vacuum cleaners to remove pet hair easily.,14.99
+504,Mini Air Hockey Table,Toys,Fun tabletop air hockey for home or office.,39.99
+505,Veggie Burger Patties,Food - Meat Substitutes,Delicious veggie burger patties for grilling or frying.,5.99
+506,Vegan Tacos,Food - Frozen Foods,Frozen vegan tacos filled with plant-based protein and spices.,7.49
+507,Set of Silicone Cooking Utensils,Kitchen,Non-stick utensils for safe and easy cooking.,29.99
+508,Pumpkin Puree,Food - Canned Goods,"Canned pumpkin puree, perfect for pies and soups.",2.99
+509,Bluetooth Shower Speaker,Audio,Water-resistant Bluetooth speaker for showers.,24.99
+510,Cork Yoga Mat,Fitness,Eco-friendly yoga mat made from sustainable materials.,39.99
+511,Gardening Tools Set,Garden,Complete set of gardening tools for outdoor tasks.,45.0
+512,Essential Oil Roller Bottles,Health,Set of roller bottles for blending and applying essential oils.,19.99
+513,Cinnamon Roll Protein Bar,Food - Snacks,Soft and chewy bar packed with protein and cinnamon flavors.,2.99
+514,Almond Butter Granola Bars,Food - Snacks,"Crunchy granola bars made with almond butter, oats, and honey, perfect for on-the-go snacking.",4.99
+515,Pet Water Fountain,Pets,Automatic water fountain for pets with filtration.,39.99
+516,Travel Shoe Bags Set,Travel,Set of breathable bags for organizing shoes while traveling.,15.99
+517,Pumpkin Spice Latte Mix,Food - Beverages,Instant mix for delicious pumpkin spice lattes at home.,3.29
+518,Pineapple Chunks (canned),Food - Fruits,Sweet pineapple chunks in syrup.,2.29
+519,Oven-Baked Sweet Potato Fries,Food - Frozen Foods,"Crispy sweet potato fries, perfectly seasoned and baked to perfection.",3.99
+520,Camping Lantern,Outdoor,Rechargeable LED camping lantern for outdoor use.,34.99
+521,Eco-Friendly Beeswax Wraps,Kitchen,"Reusable wraps for food storage, replacing plastic wraps.",14.99
+522,Mini Waffle Maker,Kitchen,Compact waffle maker for perfect small waffles.,24.99
+523,Portable Electric Fan,Home,Compact fan for personal cooling at work or home.,24.99
+524,Pet Reflective Vest,Pets,Safety vest for pets during nighttime walks.,18.99
+525,Teriyaki Chicken Skewers,Food - Meat,Grilled chicken skewers glazed with teriyaki sauce.,8.99
+526,Pineapple Rings,Food - Canned Goods,Delicious canned pineapple rings for desserts or salads.,2.49
+527,Two-Tone Windbreaker,Clothing - Outerwear,"Stylish two-tone windbreaker, perfect for active days.",59.99
+528,Customizable Name Puzzle,Toys,Personalized wooden puzzles for children that encourage learning.,29.99
+529,Maple Bacon Jerky,Food - Meat,Savory bacon jerky coated with maple flavoring.,6.99
+530,Wall-Mounted Wine Rack,Home,Stylish and modern holder for storing wine bottles on walls.,39.99
+531,Wire Shelving Unit,Home,Adjustable shelving unit for home or garage storage.,69.99
+532,Lemon Garlic Shrimp,Food - Seafood,"Marinated shrimp in a garlic and lemon sauce, perfect for grilling.",8.99
+533,Sesame Seeds,Food - Baking,Crunchy seeds perfect for toppings and baking.,1.99
+534,Rolling Cooler,Outdoor,Wheeled cooler for transporting drinks and snacks.,59.99
+535,Portable Solar Generator,Outdoor,Eco-friendly generator for outdoor adventures.,399.99
+536,Chili Beans in Sauce,Food - Canned Goods,Canned beans cooked in a savory chili sauce,1.79
+537,Creamy Spinach Dip,Food - Prepared Foods,"Deliciously creamy spinach dip, perfect for parties.",5.99
+538,Crispy Potato Tots,Food - Frozen Foods,"Golden brown potato tots, crispy on the outside and fluffy inside.",3.69
+539,Customizable Name Plate,Office,Personalized nameplate for offices or homes.,19.99
+540,Almond Milk Yogurt,Food - Dairy Alternatives,"Creamy yogurt made from almond milk, vegan-friendly.",1.99
+541,Garlic Breadsticks,Food - Sides,"Ready-to-bake garlic breadsticks, perfect with pasta dishes.",3.49
+542,Spicy Salsa Verde,Food - Condiments,"Green salsa with a spicy kick, great for dipping.",3.49
+543,Smart Wi-Fi Camera,Smart Home,Indoor Wi-Fi camera for home security.,89.99
+544,Vintage Button-Down Shirt,Clothing - Shirts,A retro-style button-down shirt with a relaxed fit.,45.99
+545,Adjustable Laptop Desk,Office,Portable desk that can be adjusted for sitting or standing.,59.99
+546,BBQ Jackfruit,Food - Prepared Foods,"Tender jackfruit cooked in BBQ sauce, a delicious plant-based alternative.",4.29
+547,Organic Cucumber,Food - Vegetables,Fresh organic cucumber perfect for salads or snacking.,1.29
+548,Roasted Chickpeas,Food - Snacks,Crispy roasted chickpeas seasoned to perfection,2.99
+549,Portable Grill Cover,Outdoor,Durable cover to protect your grill from the elements.,24.99
+550,Taro Chips,Food - Snacks,"Crispy chips made from taro root, a wonderful snack.",3.59
+551,Frozen Cauliflower Rice,Food - Frozen Foods,Convenient and low-carb alternative to traditional rice.,2.99
+552,Vanilla Pudding Mix,Food - Baking,Instant mix for creamy vanilla pudding.,1.29
+553,Sweet Potatoes (organic),Food - Vegetables,"Fresh organic sweet potatoes, great for roasting or mashing.",1.99
+554,Chic Ankle Strap Heels,Clothing - Shoes,Stylish ankle strap heels for a classy look at any event.,69.99
+555,Salsa,Food - Condiments,"Fresh and zesty salsa, perfect for nachos.",3.49
+556,Pet Bed,Pets,Comfortable pet bed for small to medium-sized dogs.,39.99
+557,Raspberry Vanilla Greek Yogurt,Food - Dairy,Creamy Greek yogurt infused with raspberry and vanilla flavors.,3.49
+558,Organic Ramen Noodles,Food - Pasta,Quick-cooking ramen noodles made with organic wheat.,2.89
+559,Dog Walking Waist Pack,Pets,Hands-free waist pack for carrying essentials while walking your dog.,19.99
+560,Sweet and Spicy Barbecue Sauce,Food - Condiments,A flavorful barbecue sauce with a sweet and spicy kick.,3.99
+561,Nut Butter Cups,Food - Snacks,Delicious dark chocolate with creamy nut butter inside.,3.99
+562,Indestructible Dog Toy,Pets,Durable toy designed for heavy chewers.,15.99
+563,High-Quality Yoga Block,Fitness,Foam yoga block for enhancing poses and stability.,12.99
+564,Herb-Infused Olive Oil,Food - Oils,Premium olive oil infused with herbs for enhanced flavor.,8.99
+565,Gaming Headset,Gaming,Comfortable gaming headset with surround sound.,69.99
+566,Party Mini Dress,Clothing - Dresses,"Eye-catching mini dress with sequins, ideal for party nights out.",69.99
+567,Coconut Milk,Food - Canned Goods,Rich coconut milk for curries and desserts.,2.49
+568,Hot Dog Buns,Food - Bakery,Soft buns perfect for stuffing with your favorite hot dogs.,2.49
+569,Camping Tent,Outdoor,Spacious 2-person camping tent with waterproof cover.,79.99
+570,Bamboo Charcoal Air Purifier Bags,Home,Natural air purifiers to absorb odors and moisture.,12.99
+571,Dog Training Clicker,Pets,Training tool for reinforcing commands and behavior in dogs.,5.99
+572,Whipped Cream Cheese,Food - Dairy,"Light and fluffy cream cheese, perfect for bagels or cooking.",2.99
+573,Chickpea Flour,Food - Baking,"Gluten-free flour made from ground chickpeas, great for cooking.",3.29
+574,Roasted Garlic Mashed Potatoes,Food - Frozen Foods,Creamy mashed potatoes infused with roasted garlic flavor.,3.99
+575,Foldable Picnic Table,Outdoor,Lightweight and portable picnic table for outdoor use.,49.99
+576,Electric Rice Cooker with Steamer,Kitchen,Cook rice and steam vegetables simultaneously for healthy meals.,49.99
+577,Vegetable Spiralizer,Kitchen,Create spiraled vegetable noodles easily for healthy meals.,19.99
+578,Almond Butter Crunch Bar,Food - Snacks,Nutritious snack bar made with almond butter and protein.,1.99
+579,Bicycle Lock,Bicycles,Heavy-duty bicycle lock for security.,29.99
+580,Travel Makeup Organizer,Beauty,Compact organizer for cosmetics during travel.,25.99
+581,Vegetarian Stuffed Peppers,Food - Prepared Foods,"Bell peppers stuffed with rice, beans, and spices, ready to bake.",4.99
+582,Cheesy Broccoli Soup Mix,Food - Soups,Just add water for a hearty cheese and broccoli soup in minutes.,2.99
+583,Pecan Nuts,Food - Snacks,"Nutty, crunchy pecans great for baking.",6.49
+584,Spicy Tuna Sushi Kit,Food - Prepared Meals,Everything you need to make delicious spicy tuna rolls at home.,8.99
+585,Travel Hair Straightener,Beauty,Compact hair straightener for travel.,29.99
+586,Insulated Wine Tote,Accessories,Stylish tote to keep wine bottles chilled while traveling.,24.99
+587,Breezy Off-The-Shoulder Top,Clothing - Tops,A light and breezy top ideal for warm days.,34.99
+588,Blueberry Chia Jam,Food - Spreads,"Homemade jam made with blueberries and chia seeds, no added sugar.",4.99
+589,Chili Lime Corn Chips,Food - Snacks,Crunchy corn chips flavored with chili and lime for a zesty kick.,2.79
+590,Gardening Kneeler and Seat,Garden,Foldable kneeler that doubles as a seat for gardening convenience.,39.99
+591,Eco-Friendly Stainless Steel Straws,Kitchen,Reusable straws that come with a cleaning brush.,12.99
+592,Outdoor Adventure Kit,Outdoor,Complete outdoor kit for camping and hiking.,89.99
+593,Pasta Maker,Kitchen,Manual pasta maker for homemade pasta.,39.0
+594,Pasta Maker Machine,Kitchen,Manual pasta maker for creating fresh pasta at home.,59.99
+595,USB-C Hub,Computers,Multi-port USB-C hub for connecting devices.,39.99
+596,Set of Gardening Gloves with Claws,Garden,Multi-functional gloves for planting and digging without tools.,15.99
+597,Organic Tomato Ketchup,Food - Condiments,"Classic ketchup made from organic tomatoes, no added sugar.",3.49
+598,Garlic Herb Seasoning,Food - Spices,A blend of herbs and garlic for seasoning meats and vegetables.,1.99
+599,Sparkling Blood Orange Soda,Food - Beverages,A refreshing sparkling beverage with a bold blood orange flavor.,1.99
+600,Maple Almond Granola,Food - Breakfast,Crunchy granola with maple flavor and almond pieces for breakfast.,5.49
+601,Fresh Lemons,Food - Fresh Produce,Citrusy lemons perfect for drinks and cooking.,0.75
+602,Tortilla Chips,Food - Snacks,"Crispy tortilla chips, perfect for dipping.",2.99
+603,Peanut Butter Cookies,Food - Bakery,Soft and chewy cookies made with creamy peanut butter.,3.49
+604,Digital Voice Recorder,Electronics,High-quality voice recorder for lectures and meetings.,49.99
+605,Smart LED Light Strip,Home,"Customizable RGB LED light strip, perfect for mood lighting.",29.99
+606,Wrap Front Midi Skirt,Clothing - Bottoms,"Elegant midi skirt with a wrap design, great for both formal and casual events.",44.99
+607,Car Windshield Sun Shade,Automotive,Protects car interior from sun damage and heat.,19.99
+608,Electric Food Slicer,Kitchen,"Versatile slicer for meats, cheeses, and vegetables.",99.99
+609,Classic Black Trousers,Clothing - Pants,Timeless black trousers for a smart and sophisticated look.,54.99
+610,Compact Umbrella,Accessories,Portable and lightweight umbrella for protection from rain.,12.99
+611,Plant-Based Cookbook,Books,Delicious recipes focusing on plant-based ingredients.,29.99
+612,Black Bean Salsa,Food - Snacks,Spicy salsa made with black beans and tomatoes.,3.49
+613,Scented Candles,Home,Set of three aromatic candles with various scents.,19.99
+614,Hummus Trio Pack,Food - Snacks,"A variety pack of classic, roasted red pepper, and garlic hummus.",5.49
+615,Lemon Herb Chicken,Food - Meat,Marinated chicken grilled with lemon and herbs.,7.49
+616,Digital Stopwatch Timer,Fitness,Accurate stopwatch for timing events and workouts.,12.99
+617,Chocolate Avocado Pudding,Food - Desserts,Rich and creamy pudding made with ripe avocados and cocoa.,4.99
+618,Tuna Fish (canned),Food - Canned Goods,"Wild-caught tuna in olive oil, perfect for salads.",2.29
+619,Dog Frisbee Toy,Pets,Durable and soft frisbee designed for dogs to play with.,10.99
+620,Coconut Cream,Food - Baking & Cooking,"Rich cream extracted from coconut milk, ideal for desserts.",2.99
+621,Reusable Produce Bags Set,Kitchen,Eco-friendly mesh bags for shopping produce at the market.,14.99
+622,Lentil Pasta,Food - Pasta,"Gluten-free pasta made from lentils, high in protein.",4.99
+623,Buffalo Chicken Wraps,Food - Prepared Meals,Savory wraps with buffalo chicken and fresh vegetables.,5.99
+624,Jalapeño Cornbread,Food - Bakery,Spicy cornbread infused with jalapeños for a kick of flavor at your next meal.,3.29
+625,Travel Yoga Mat,Fitness,Lightweight yoga mat for practicing on the go.,34.99
+626,Automatic Pet Feeder,Pets,Programmable pet feeder for scheduled meals.,69.99
+627,Memory Foam Pillow,Home,Ergonomic memory foam pillow for better sleep.,39.99
+628,Teriyaki Sauce,Food - Condiments,Sweet and savory sauce for marinating and glazing meats or vegetables.,2.99
+629,Crew Neck Sweater,Clothing - Sweaters,"A comfortable crew neck sweater, great for all seasons.",39.99
+630,Action Camera,Electronics,Compact action camera for capturing adventures.,199.99
+631,Yoga Wheel,Fitness,Supportive yoga wheel for deep stretching and balance.,34.99
+632,Cheesy Cauliflower Bake,Food - Frozen Vegetables,"A frozen cheesy bake made with cauliflower, great as a side dish or a vegetarian meal.",5.49
+633,Peach Green Tea,Food - Beverages,"Refreshing green tea infused with peach, perfect for a hot day.",3.49
+634,Peach & Mango Salsa,Food - Snacks,"A zesty salsa made with peaches and mangos, great for chips.",4.49
+635,Air Fryer,Kitchen,Compact air fryer for healthier cooking.,79.99
+636,Honey-Balsamic Vinaigrette,Food - Dressing,A sweet and tangy vinaigrette dressing for salads.,3.39
+637,Cinnamon Ice Cream,Food - Frozen Desserts,"Creamy ice cream with a warm cinnamon flavor, perfect for dessert.",4.99
+638,Spicy BBQ Sauce,Food - Condiments,A tangy and spicy BBQ sauce that's perfect for grilling.,3.99
+639,Vegetable Potstickers,Food - Frozen Food,"Delicious vegetable dumplings, perfect for steaming or frying.",5.99
+640,Spicy Beef Taco Mix,Food - Condiments,Easy mix for making spicy beef tacos.,1.99
+641,Cauliflower Gnocchi,Food - Frozen Foods,"Soft and pillowy gnocchi made from cauliflower, perfect with sauce.",3.59
+642,Cauliflower Crust Pizza,Food - Freezer,A gluten-free pizza crust made from cauliflower.,7.99
+643,Memory Foam Mattress Pad,Home,Extra layer of comfort for your mattress.,69.99
+644,Fridge Magnet Set,Home,Fun fridge magnets to decorate your kitchen.,15.99
+645,Coconut Cream Pie Yogurt,Food - Dairy Alternatives,"Yogurt with the flavors of coconut cream pie, nice and indulgent.",1.99
+646,Wall-Mounted Bookshelf,Home,Floating bookshelf to display your favorite books.,39.99
+647,Mediterranean Couscous Salad,Food - Salads,"Couscous salad with cucumbers, tomatoes, feta, and olives, ready to eat.",5.49
+648,Snap-On Tupperware Set,Kitchen,Durable and versatile food storage containers.,34.99
+649,Portable Air Purifier,Health,Compact air purifier to improve indoor air quality.,69.99
+650,French Bread,Food - Bakery,"Freshly baked French baguette, perfect for dipping.",2.49
+651,Robot Vacuum Cleaner,Home Appliances,Smart robotic vacuum for automatic cleaning.,299.99
+652,Smartphone Hand Grip,Accessories,Sturdy grip to hold your phone securely while taking selfies.,9.99
+653,Lightweight Rain Jacket,Clothing - Outerwear,"Water-resistant jacket ideal for outdoor activities, featuring a packable design.",79.99
+654,Cheddar & Bacon Potato Skins,Food - Frozen,Gourmet potato skins loaded with cheddar cheese and bacon.,7.49
+655,Cranberry Orange Juice,Food - Beverages,Refreshing juice blend of cranberries and oranges.,2.49
+656,Smartphone Projector,Electronics,DIY projector that magnifies your smartphone screen for movie nights.,29.99
+657,Stuffed Peppers with Quinoa,Food - Prepared Meals,Bell peppers filled with quinoa and vegetables.,7.99
+658,Adjustable Laptop Stand,Office,Ergonomic stand for laptops to improve posture while working.,29.99
+659,Magnet Travel Fridge Magnets,Accessories,Fun tourist magnets from around the world for your fridge.,12.99
+660,Rechargeable Hand Warmer,Accessories,Portable rechargeable warmer for cold days.,22.99
+661,Lemon Dill Chicken Skewers,Food - Meat,"Marinated chicken skewers with lemon and dill flavor, grilled to perfection.",9.99
+662,Digital Camera,Electronics,Compact digital camera with 20MP resolution.,299.99
+663,Lemon Garlic Marinade,Food - Condiments,"A zesty marinade made with lemon juice and garlic, ideal for chicken or fish.",4.29
+664,Denim Jacket,Clothing - Outerwear,A classic denim jacket that never goes out of style.,69.99
+665,Chewy Granola Bars,Food - Snacks,Oats and honey bars with a chewy texture and nutty flavor.,3.49
+666,Peanut Butter Pretzel Nuggets,Food - Snacks,Crunchy pretzel nuggets filled with creamy peanut butter.,3.29
+667,Pet Travel Bowl,Pets,Collapsible travel bowl for pets on the go.,10.99
+668,Self-Adhesive Wallpaper,Home,Peel and stick wallpaper for easy home decor changes.,34.99
+669,Garden Hoses with Expandable Features,Garden,"Lightweight, expandable hoses for easy handling.",34.99
+670,Diced Tomatoes (canned),Food - Canned Goods,"Canned diced tomatoes, great base for sauces and soups.",1.49
+671,Smartphone Tripod with Bluetooth Remote,Photography,Tripod with wireless remote for effortless photo-taking.,29.99
+672,Skincare Fridge,Beauty,Small fridge designed to keep skincare products cool and fresh.,39.99
+673,Honey Sriracha Chicken Bites,Food - Frozen Foods,"Frozen chicken bites coated in a honey sriracha glaze, spicy and sweet.",7.99
+674,Apple Sauce,Food - Canned Goods,"Unsweetened apple sauce, great for snacks or baking.",2.19
+675,Sliced Strawberries,Food - Fruits,Fresh sliced strawberries for toppings or snacking,4.99
+676,Window A/C Unit,Home Appliances,Energy-efficient window air conditioner for cooling.,299.99
+677,Insulated Lunch Bag,Kitchen,Stylish insulated lunch bag for on-the-go meals.,24.99
+678,Creamy Garlic Mashed Potatoes,Food - Sides,Rich and buttery mashed potatoes with roasted garlic.,3.99
+679,Organic Fruit Salad,Food - Produce,"Fresh fruit salad, ready to eat and refreshing.",4.49
+680,Pesto Genovese,Food - Condiments,Traditional basil pesto made with extra virgin olive oil.,6.49
+681,Magnetic Phone Case,Accessories,Stylish case with magnetic closure for smartphones.,19.99
+682,Sesame Garlic Noodles,Food - Pasta,Delicious noodles tossed in a sesamegarlic sauce.,3.49
+683,Fettuccine Alfredo Dinner Kit,Food - Prepared Meals,Easy meal kit for creamy fettuccine Alfredo.,5.49
+684,Coconut Curry Sauce,Food - Sauces,A flavorful sauce made with coconut milk and spices.,3.89
+685,Pet Water Bottle,Pets,Portable water bottle for pets when traveling.,18.99
+686,Electric Can Opener,Kitchen,Automatic can opener for easy meal prep.,29.99
+687,Lockable Bicycle Chain,Outdoor,Heavy-duty chain lock for securing bicycles.,19.99
+688,Gaming Mousepad,Gaming,Oversized gaming mousepad with smooth surface.,19.99
+689,Pet Hair Remover,Pets,Effective roller for removing pet hair from furniture.,9.99
+690,Sporty Cap,Clothing - Accessories,Stylish cap to complete your athletic look.,15.99
+691,Wireless Music Receiver,Audio,Stream music from your device to any speaker wirelessly.,19.99
+692,Home Karaoke System,Audio,Complete karaoke system with microphones and speakers.,129.99
+693,Dog Waste Bag Dispenser,Pets,Convenient dispenser for dog waste bags on walks.,6.99
+694,Frozen Broccoli,Food - Frozen,"Nutrient-rich broccoli, easy to add to any meal.",2.49
+695,Sweet Potato Tots,Food - Frozen Foods,"Crispy sweet potato bites, delicious as a side or snack.",4.29
+696,Chiffon Blouse,Clothing - Shirts,Elegant chiffon blouse perfect for work or outings.,39.99
+697,Sliced Olives,Food - Condiments,"Pitted black olives, perfect for salads and pizzas.",1.99
+698,Golf Putting Green,Sports,Indoor putting green for practicing your putting skills.,79.99
+699,Heated Throw Blanket,Home,Soft blanket that provides warmth with adjustable settings.,49.99
+700,High-Pressure Handheld Shower Head,Bathroom,Shower head designed for a strong spray and complete coverage.,39.99
+701,Smart Thermostat,Smart Home,Wi-Fi enabled thermostat for energy-saving temperature control.,149.99
+702,Coconut Milk Yogurt,Food - Dairy Alternatives,Creamy yogurt made with coconut milk,2.99
+703,Apple Pie Filling,Food - Canned Goods,"Sweet and spiced apple filling, perfect for pies.",3.49
+704,Coconut Chia Seed Pudding,Food - Snacks,"Ready-to-eat chia seed pudding made with coconut milk, perfect for breakfast or dessert.",2.99
+705,Quinoa & Black Bean Salad,Food - Salads,A nutritious salad with quinoa and black beans,7.49
+706,Electric Fondue Pot,Kitchen,Set for making fondue at home.,39.99
+707,Insulated Coffee Mug,Kitchen,Double-walled mug to keep your drink hot for longer.,24.99
+708,Car Escape Tool,Automotive,Multi-functional tool for emergency situations in the car.,12.99
+709,Luxury Bathrobe,Clothing,Soft and cozy bathrobe perfect for relaxing at home.,49.99
+710,Cranberry Almond Cookies,Food - Bakery,Delicious cookies with cranberries and almonds in every bite.,4.29
+711,Miso Soup Mix,Food - Soups,"Instant miso soup mix, just add hot water for a warm meal.",3.29
+712,Kale Caesar Salad Kit,Food - Salads,Fresh kale with Caesar dressing and croutons.,5.99
+713,Almond Flour Pancake Mix,Food - Baking,Gluten-free pancake mix made with almond flour.,5.99
+714,Hair Dryer,Beauty,Compact hair dryer with multiple heat settings.,39.99
+715,Digital Bullet Journal,Apps,Stylish digital journaling app for notes and organizing tasks.,24.99
+716,Organic Granola,Food - Breakfast,Healthy granola made with oats and honey.,5.49
+717,DIY Candle Making Kit,Crafts,Everything you need to make your own candles.,22.99
+718,Creamy Garlic Dressing,Food - Condiments,"Rich and creamy dressing with garlic flavor, perfect for salads.",3.99
+719,Nail Polish Set,Beauty,Assorted nail polish set for vibrant nails.,25.0
+720,Mushroom Soup (canned),Food - Canned Goods,Creamy soup full of rich mushroom flavor.,2.49
+721,Cabbage Slaw Mix,Food - Vegetables,Fresh cabbage and carrot slaw mix for salads.,2.29
+722,Blue Denim Jeans,Clothing - Bottoms,Classic fit blue jeans with a slight stretch for comfort and durability.,49.99
+723,Organic Spinach,Food - Produce,"Fresh organic spinach, great for salads or cooking.",2.99
+724,Ceramic Cookware Set,Kitchen,Durable and non-stick ceramic cookware for healthy cooking.,179.99
+725,Spinach and Cheese Stuffed Shells,Food - Frozen Meals,Delicious pasta shells filled with spinach and cheese,5.99
+726,Pet First Aid Kit,Pets,Essential kit for taking care of your pets' health emergencies.,29.99
+727,Black Bean Spaghetti,Food - Pasta,"High-protein pasta made from black beans, gluten-free.",3.99
+728,Chocolate Coconut Protein Balls,Food - Snacks,No-bake protein balls with chocolate and coconut flavors.,2.99
+729,Elegant Maxi Skirt,Clothing - Bottoms,Float through the day in this beautiful floor-length skirt.,44.99
+730,High-Top Leather Boots,Clothing - Footwear,Durable high-top leather boots for the stylish adventurer.,99.99
+731,Cocktail Shaker Set,Kitchen,"Bartender kit with shaker, jigger, and strainer.",29.99
+732,Beach Cover-Up,Clothing - Swimwear,"Lightweight cover-up perfect for the beach, with a breezy design.",29.99
+733,Buffalo Cauliflower Wings,Food - Frozen Foods,Crispy cauliflower bites tossed in spicy buffalo sauce.,6.99
+734,Saffron Rice Mix,Food - Grains,Flavorful rice mix with saffron and spices.,2.99
+735,Couscous,Food - Grains,"Quick-cooking couscous, great as a side or base.",2.49
+736,Cheddar Cheese Slices,Food - Dairy,"Creamy cheddar cheese slices, perfect for sandwiches and snacks.",3.49
+737,Savory Oatmeal Cups,Food - Breakfast,"Savory oatmeal ready to eat, great for breakfast or a snack.",1.99
+738,Fitness Resistance Bands,Fitness,Set of resistance bands for home workouts.,29.99
+739,Fitness Jump Rope with LCD Counter,Fitness,Weighted jump rope that counts jumps and calories burned.,15.99
+740,Dark Chocolate Bars,Food - Snacks,"Rich dark chocolate bars, perfect for a sweet treat.",2.99
+741,Portable Blender,Kitchen,Battery-operated blender for smoothies on the go.,30.0
+742,Carrot Ginger Soup,Food - Soups,"Smooth soup made from carrots and ginger, great for cold days.",4.29
+743,Basic V-Neck T-Shirt,Clothing - Tops,A staple v-neck t-shirt that pairs well with anything.,19.99
+744,Portable Pet Bathing Tool,Pets,Handheld sprayer designed for washing pets easily.,29.99
+745,Protein Pancake Mix,Food - Breakfast,A protein-packed pancake mix for a nutritious breakfast.,3.99
+746,Pita Bread,Food - Bakery,"Soft pita bread, perfect for sandwiches or dips.",2.99
+747,Multi-Cooker,Kitchen,Versatile multi-cooker for pressure cooking and slow cooking.,89.99
+748,Spicy Roasted Nuts,Food - Snacks,"A mix of nuts roasted with spicy seasonings, perfect for snacking.",4.99
+749,Leather Wallet,Accessories,Genuine leather wallet with multiple compartments.,49.99
+750,Luxury Bath Salts,Beauty,Scented bath salts for relaxation and self-care.,19.99
+751,Electronic Drum Kit,Music,Compact electronic drum kit for musicians of all levels.,359.99
+752,Caramel Apple Chips,Food - Snacks,Crispy apple chips drizzled with caramel for a sweet treat.,3.49
+753,Hand Crank Blender,Kitchen,Manual blender for smoothies and mixing ingredients on the go.,18.99
+754,Nutty Quinoa Salad,Food - Salads,"A delicious salad with quinoa, nuts, and cranberries.",4.99
+755,Vegetable Medley,Food - Produce,Mixed fresh vegetables for stir-frying or roasting.,2.99
+756,Customizable Photo Calendar,Books,Personalized calendar with your favorite photos.,19.99
+757,Portable Camping Shower,Outdoor,Convenient shower system for camping and outdoor activities.,39.99
+758,Leek and Potato Soup,Food - Soups,Savory soup made with leeks and potatoes.,3.29
+759,Teriyaki Chicken Bowl,Food - Prepared Meals,Ready-to-eat chicken bowl with teriyaki sauce and rice.,6.49
+760,Peanut Butter Banana Smoothie Mix,Food - Beverages,"Smoothie mix combining peanut butter and banana, great for a quick breakfast.",4.49
+761,Ice Cream,Food - Frozen Foods,"Rich and creamy ice cream, available in various flavors.",5.99
+762,Pocket Blanket,Outdoor,"Compact, waterproof blanket for picnics and events.",24.99
+763,Herbed Chicken Breast,Food - Meat,"Marinated chicken breast seasoned with herbs, ready for grilling.",7.99
+764,Jigsaw Puzzle,Toys,500-piece jigsaw puzzle featuring beautiful scenery.,14.99
+765,Spinach and Feta Stuffed Chicken Breast,Food - Meat,"Juicy chicken breast stuffed with spinach and feta cheese, seasoned to perfection.",8.99
+766,Reflective Safety Vest,Safety,Bright safety vest for outdoor visibility during any activity.,19.99
+767,Pet Leash,Pets,Durable pet leash with comfortable handle.,15.99
+768,Garden Vegetable Chips,Food - Snacks,"Crispy chips made from assorted garden vegetables, lightly salted.",3.49
+769,Pet Carrier,Pets,Comfortable pet carrier for travel and vet visits.,39.99
+770,Stuffed Bell Peppers,Food - Frozen Meals,Bell peppers stuffed with rice and vegetables,5.99
+771,Portable Bluetooth Keyboard,Electronics,Compact keyboard for tablets and smartphones.,39.99
+772,Fleece Hoodie,Clothing - Outerwear,Ultra-soft fleece hoodie for warmth and comfort during chilly days.,39.99
+773,Roasted Garlic,Food - Condiments,Savory roasted garlic in a jar for easy use.,4.29
+774,Freestanding Wine Rack,Home,Stylish wine rack to store and display bottles.,79.99
+775,Caramelized Onion Dip,Food - Dairy,"Creamy dip made with caramelized onions, perfect for chips or veggies.",3.99
+776,Mediterranean Chickpea Bowl,Food - Prepared Foods,"Chickpeas served with olives, feta, and hummus, a healthy meal.",6.49
+777,Emergency Preparedness Kit,Safety,Complete kit for emergency situations including food and water.,99.99
+778,Mini Projector for Smartphones,Electronics,Compact and portable projector for watching videos anywhere.,99.99
