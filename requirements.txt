@@ -8,3 +8,7 @@ pydantic
 python-dotenv
 requests
 streamlit
+pinecone
+langchain-text-splitters
+pypdf
+pytest
