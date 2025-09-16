@@ -4,6 +4,8 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 
 from app.api.deps import get_settings
+from src.graph.graph import build_graph
+from src.graph.state import RAGState
 
 
 router = APIRouter(tags=["chat"])
@@ -26,15 +28,24 @@ class ChatResponse(BaseModel):
     trace_id: str = ""
 
 
+_graph = build_graph()
+
+
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(payload: ChatRequest, settings=Depends(get_settings)) -> ChatResponse:
-    """Chat endpoint stub. Wire LangGraph workflow here in subsequent steps."""
-    # TODO: replace with LangGraph invocation and real retrieval/citations
+    state = RAGState(query=payload.query)
+    out = _graph.invoke(state)
+
+    # Serialize citations for response model
+    resp_citations: List[Citation] = []
+    for c in out.citations or []:
+        resp_citations.append(Citation(source=c.source, title=c.title))
+
     return ChatResponse(
-        answer="Template endpoint is live. Wire LangGraph to generate answers.",
-        citations=[],
-        should_escalate=False,
-        trace_id="template",
+        answer=out.answer or "",
+        citations=resp_citations,
+        should_escalate=bool(out.should_escalate),
+        trace_id=out.trace_id or "",
     )
 
 

@@ -14,6 +14,7 @@ class RAGState(BaseModel):
 
     query: str
     intent: Optional[str] = None
+    should_retrieve: bool = True
     entities: Dict[str, Any] = {}
     docs: List[Dict[str, Any]] = []
     sql_rows: List[Dict[str, Any]] = []
@@ -22,5 +23,8 @@ class RAGState(BaseModel):
     should_escalate: bool = False
     cache_key: Optional[str] = None
     trace_id: Optional[str] = None
+    grounded: Optional[bool] = None
+    grounded_explanation: Optional[str] = None
+    grounded_retry_count: int = 0
 
 

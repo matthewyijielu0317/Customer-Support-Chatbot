@@ -20,8 +20,16 @@ def _doc_to_state_dict(doc) -> Dict[str, Any]:
 
 
 def retrieve_docs_node(state: RAGState) -> RAGState:
-    """Retrieve top-k relevant policy chunks from Pinecone into state."""
-    results = _retriever.retrieve(query=state.query, k=8)
+    """Retrieve top-3 relevant policy chunks from Pinecone into state.
+
+    Honors `state.should_retrieve` to optionally skip retrieval.
+    """
+    if not state.should_retrieve:
+        state.docs = []
+        state.citations = []
+        return state
+
+    results = _retriever.retrieve(query=state.query, k=3)
     state.docs = [_doc_to_state_dict(d) for d in results]
 
     citations: List[Citation] = []
