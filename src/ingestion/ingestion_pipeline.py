@@ -6,11 +6,12 @@ from langchain_openai import OpenAIEmbeddings
 
 # SemanticChunker may not be available in all environments
 try:
-    from langchain_text_splitters import SemanticChunker
+    from langchain_text_splitters import SemanticChunker  # legacy location
     SEMANTIC_CHUNKER_AVAILABLE = True
 except ImportError:
     try:
-        from langchain_experimental.text_splitters import SemanticChunker
+        # Current location in langchain-experimental
+        from langchain_experimental.text_splitter import SemanticChunker
         SEMANTIC_CHUNKER_AVAILABLE = True
     except ImportError:
         SemanticChunker = None

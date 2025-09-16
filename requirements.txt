@@ -1,6 +1,7 @@
 langchain
 langchain-community
 langchain-openai
+langchain-experimental
 langgraph
 openai
 faiss-cpu
@@ -12,3 +13,5 @@ pinecone
 langchain-text-splitters
 pypdf
 pytest
+sentence-transformers
+torch
