@@ -1,11 +1,28 @@
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 from src.graph.state import RAGState, Citation
-from src.retrievers.pinecone_retriever import PineconeRetriever
 from src.config.settings import settings
+from src.retrievers.pinecone_retriever import PineconeRetriever
+import os
 
 
-_retriever = PineconeRetriever(index_name=settings.pinecone_index, namespace="kb")
+_retriever: Optional[PineconeRetriever] = None
+
+
+def _get_retriever() -> Optional[PineconeRetriever]:
+    global _retriever
+    # Require both Pinecone and OpenAI keys to be present
+    pinecone_key = settings.pinecone_api_key or os.getenv("PINECONE_API_KEY", "")
+    openai_key = settings.openai_api_key or os.getenv("OPENAI_API_KEY", "")
+    if not pinecone_key or not openai_key:
+        return None
+    if _retriever is None:
+        try:
+            _retriever = PineconeRetriever(index_name=settings.pinecone_index, namespace="kb")
+        except Exception:
+            _retriever = None
+            return None
+    return _retriever
 
 
 def _doc_to_state_dict(doc) -> Dict[str, Any]:
@@ -29,7 +46,14 @@ def retrieve_docs_node(state: RAGState) -> RAGState:
         state.citations = []
         return state
 
-    results = _retriever.retrieve(query=state.query, k=3)
+    retr = _get_retriever()
+    if retr is None:
+        # No-op when vector service or API keys are not configured
+        state.docs = []
+        state.citations = []
+        return state
+
+    results = retr.retrieve(query=state.query, k=3)
     state.docs = [_doc_to_state_dict(d) for d in results]
 
     citations: List[Citation] = []

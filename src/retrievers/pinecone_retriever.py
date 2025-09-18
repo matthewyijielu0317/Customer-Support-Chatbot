@@ -20,9 +20,15 @@ class PineconeRetriever:
         self.namespace = namespace
         self.embedding_model = embedding_model
 
-        self._pc = Pinecone(api_key=(settings.pinecone_api_key or os.getenv("PINECONE_API_KEY", "")))
+        pinecone_key = settings.pinecone_api_key or os.getenv("PINECONE_API_KEY", "")
+        openai_key = settings.openai_api_key or os.getenv("OPENAI_API_KEY", "")
+
+        if not pinecone_key or not openai_key:
+            raise ValueError("Missing Pinecone or OpenAI API key")
+
+        self._pc = Pinecone(api_key=pinecone_key)
         self._index = self._pc.Index(index_name)
-        self._openai = OpenAI(api_key=(settings.openai_api_key or os.getenv("OPENAI_API_KEY", "")))
+        self._openai = OpenAI(api_key=openai_key)
 
     async def aretrieve(self, query: str, k: int = 10, filter: Optional[Dict[str, Any]] = None) -> List[Document]:
         emb = self._openai.embeddings.create(model=self.embedding_model, input=[query]).data[0].embedding

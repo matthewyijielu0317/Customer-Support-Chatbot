@@ -21,6 +21,13 @@ class Settings(BaseSettings):
     postgres_dsn: str = Field(default="", env="POSTGRES_DSN")
     redis_url: str = Field(default="redis://localhost:6379/0", env="REDIS_URL")
     mongodb_uri: str = Field(default="", env="MONGODB_URI")
+    recent_messages_window: int = Field(default=12, env="RECENT_MESSAGES_WINDOW")
+    session_redis_ttl_days: int = Field(default=7, env="SESSION_REDIS_TTL_DAYS")
+    semantic_cache_namespace: str = Field(default="semantic_cache", env="SEMANTIC_CACHE_NAMESPACE")
+    semantic_cache_similarity_threshold: float = Field(default=0.9, env="SEMANTIC_CACHE_SIMILARITY_THRESHOLD")
+    session_summary_min_messages: int = Field(default=12, env="SESSION_SUMMARY_MIN_MESSAGES")
+    session_summary_history_limit: int = Field(default=40, env="SESSION_SUMMARY_HISTORY_LIMIT")
+    session_summary_max_chars: int = Field(default=256, env="SESSION_SUMMARY_MAX_CHARS")
 
     class Config:
         env_file = ".env"
@@ -33,5 +40,3 @@ def get_settings() -> Settings:
 
 
 settings = get_settings()
-
-

@@ -3,6 +3,8 @@ langchain-community
 langchain-openai
 langchain-experimental
 langgraph
+fastapi>=0.111
+uvicorn[standard]>=0.30
 openai
 faiss-cpu
 pydantic
@@ -15,3 +17,8 @@ pypdf
 pytest
 sentence-transformers
 torch
+sqlalchemy>=2.0
+psycopg[binary]>=3.2,<4
+asyncpg>=0.29
+redis>=5.0
+pymongo>=4.7

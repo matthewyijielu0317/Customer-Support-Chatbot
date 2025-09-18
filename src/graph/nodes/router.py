@@ -7,6 +7,7 @@ import os
 
 from src.config.settings import settings
 from src.graph.state import RAGState
+from src.graph.nodes.retrieve_sql import _extract_entities
 
 
 IntentType = Literal[
@@ -120,7 +121,51 @@ def decide_should_retrieve(query: str, intent: str) -> bool:
 def router_node(state: RAGState) -> RAGState:
     intent = classify_intent(state.query)
     state.intent = intent
-    state.should_retrieve = decide_should_retrieve(state.query, intent)
+    # Initialize flags
+    state.should_retrieve_sql = False
+    state.should_retrieve_docs = False
+
+    # Early exit for chitchat: no retrieval
+    if intent == "chitchat":
+        state.should_retrieve = False
+        return state
+
+    q = (state.query or "").strip().lower()
+    entities = _extract_entities(state.query)
+    state.entities.update(entities)
+    has_identifier = bool(entities.get("order_id") or entities.get("customer_email") or entities.get("product_id"))
+    has_dsn = bool(settings.postgres_dsn)
+
+    # Policy-centric intents: docs only
+    if intent in {"returns_exchanges", "shipping_delivery", "customer_account", "product_information"}:
+        state.should_retrieve_docs = True
+        state.should_retrieve_sql = False
+
+    # Order management: prefer SQL, require identifier; if none, ask clarifying (no retrieval)
+    elif intent == "order_management":
+        if has_dsn and has_identifier:
+            state.should_retrieve_sql = True
+            state.should_retrieve_docs = False
+        else:
+            state.should_retrieve_sql = False
+            state.should_retrieve_docs = False
+
+    # Payments/billing: policy often relevant and SQL helpful if identifiers present
+    elif intent == "payments_billing":
+        if has_dsn and has_identifier:
+            state.should_retrieve_sql = True
+            state.should_retrieve_docs = True
+        else:
+            state.should_retrieve_sql = False
+            state.should_retrieve_docs = True
+
+    # Fallback: docs
+    else:
+        state.should_retrieve_docs = True
+        state.should_retrieve_sql = False
+
+    # should_retrieve governs groundedness check and overall retrieval
+    state.should_retrieve = bool(state.should_retrieve_sql or state.should_retrieve_docs)
     return state
 
 
