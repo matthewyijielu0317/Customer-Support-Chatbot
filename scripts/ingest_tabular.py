@@ -8,12 +8,13 @@ project_root = Path(__file__).resolve().parents[1]
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from src.ingestion.tabular.loader import create_engine_from_dsn, load_csvs
+from src.ingestion.tabular.loader import create_engine_from_dsn, load_csvs, close_engine
 
 
 async def run(args):
     engine = create_engine_from_dsn(args.dsn)
     rows = await load_csvs(engine, args.customers, args.orders, args.products)
+    await close_engine(engine)
     print(f"Successfully loaded {rows} rows into Postgres.")
 
 
@@ -29,5 +30,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
 

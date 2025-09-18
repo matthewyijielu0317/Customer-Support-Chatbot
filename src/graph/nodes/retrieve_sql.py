@@ -2,9 +2,11 @@ import re
 from typing import List, Dict, Any
 
 from src.config.settings import settings
+from copy import deepcopy
 from src.db.postgres_sync import create_engine_sync
 from src.db import queries as q
 from src.graph.state import RAGState, Citation
+from src.utils.masking import mask_email
 
 
 _ENGINE = create_engine_sync(settings.postgres_dsn) if settings.postgres_dsn else None
@@ -51,9 +53,23 @@ def _rows_to_citations(rows: List[Dict[str, Any]]) -> List[Citation]:
     return cites
 
 
+def _mask_row(row: Dict[str, Any], query: str) -> Dict[str, Any]:
+    masked = deepcopy(row)
+    if "customer_email" in masked:
+        masked["customer_email"] = mask_email(masked.get("customer_email"), query)
+    if "email" in masked:
+        masked["email"] = mask_email(masked.get("email"), query)
+    return masked
+
+
 def retrieve_sql_node(state: RAGState) -> RAGState:
     # If DSN not configured or engine missing, skip
     if _ENGINE is None or not settings.postgres_dsn:
+        state.sql_rows = []
+        return state
+
+    user_id = state.user_id
+    if not user_id:
         state.sql_rows = []
         return state
 
@@ -64,15 +80,17 @@ def retrieve_sql_node(state: RAGState) -> RAGState:
 
     # Priority: order -> email -> product
     if "order_id" in entities:
-        od = q.get_order_details_by_id(_ENGINE, int(entities["order_id"]))
+        od = q.get_order_details_for_user(_ENGINE, user_id, int(entities["order_id"]))
         if od:
-            sql_rows.append(od)
+            sql_rows.append(_mask_row(od, state.query))
     elif "customer_email" in entities:
-        recent = q.get_recent_orders_by_email(_ENGINE, str(entities["customer_email"]))
-        sql_rows.extend(recent)
-        cust = q.get_customer_by_email(_ENGINE, str(entities["customer_email"]))
-        if cust:
-            sql_rows.insert(0, cust)
+        email = str(entities["customer_email"]).strip().lower()
+        if email == user_id.strip().lower():
+            profile = q.get_customer_profile(_ENGINE, user_id)
+            if profile:
+                sql_rows.append(_mask_row(profile, state.query))
+            recent = q.get_recent_orders_for_user(_ENGINE, user_id)
+            sql_rows.extend([_mask_row(r, state.query) for r in recent])
     elif "product_id" in entities:
         pd = q.get_product_by_id(_ENGINE, int(entities["product_id"]))
         if pd:
@@ -86,5 +104,4 @@ def retrieve_sql_node(state: RAGState) -> RAGState:
         state.citations = (state.citations or []) + db_cites
 
     return state
-
 

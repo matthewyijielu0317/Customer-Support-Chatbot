@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Sequence
+from typing import List, Sequence, Any, Optional
 
 from openai import OpenAI
 import os
@@ -31,6 +31,7 @@ def generate_node(state: RAGState) -> RAGState:
     intent = state.intent or "policy_qna"
     context = _format_context(state.docs or [])
     sql_rows = state.sql_rows or []
+    order_rows = [row for row in sql_rows if isinstance(row, dict) and "order_id" in row]
     session_summary = (state.session_summary or "").strip()
     recent_messages = state.recent_messages or []
 
@@ -100,6 +101,11 @@ def generate_node(state: RAGState) -> RAGState:
     feedback = (state.grounded_explanation or "").strip() if state.grounded is False else ""
     feedback_block = f"\n\nGroundedness feedback: {feedback}\nPlease revise to be strictly supported by the context above." if feedback else ""
 
+    if order_rows:
+        state.answer = _format_order_response(order_rows)
+        state.should_retrieve = False
+        return state
+
     user_prompt = (
         f"User intent: {intent}.\n"
         f"User question: {state.query}\n\n"
@@ -157,3 +163,47 @@ def generate_node(state: RAGState) -> RAGState:
         )
 
     return state
+
+
+def _format_order_response(order_rows: List[dict]) -> str:
+    lines: List[str] = []
+    for order in order_rows:
+        order_id = order.get("order_id")
+        product = order.get("product_name") or "item"
+        quantity = order.get("quantity")
+        order_date = _format_date(order.get("order_date"))
+        delivery_date = _format_date(order.get("delivery_date"))
+
+        parts: List[str] = []
+        if quantity:
+            parts.append(f"{quantity} x {product}")
+        else:
+            parts.append(str(product))
+        if order_date:
+            parts.append(f"ordered on {order_date}")
+        if delivery_date:
+            parts.append(f"delivery {delivery_date}")
+
+        description = ", ".join(parts)
+        if order_id is not None:
+            lines.append(f"Order #{order_id}: {description}.")
+        else:
+            lines.append(description)
+
+    if not lines:
+        return "I found your order details, but I could not format them right now."
+
+    if len(lines) == 1:
+        return "Here is your order detail:\n" + lines[0]
+    return "Here are your order details:\n" + "\n".join(f"- {line}" for line in lines)
+
+
+def _format_date(value: Any) -> Optional[str]:
+    if not value:
+        return None
+    if isinstance(value, str):
+        return value
+    try:
+        return value.isoformat()
+    except AttributeError:
+        return str(value)
