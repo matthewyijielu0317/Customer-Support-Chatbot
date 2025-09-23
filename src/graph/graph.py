@@ -4,7 +4,6 @@ from src.graph.state import RAGState
 from src.graph.nodes.router import router_node
 from src.graph.nodes.retrieve_docs import retrieve_docs_node
 from src.graph.nodes.retrieve_sql import retrieve_sql_node
-from src.graph.nodes.parallel_retrieve import parallel_retrieve_node
 from src.graph.nodes.generate import generate_node
 from src.graph.nodes.groundedness import groundedness_node
 from src.graph.nodes.cache_check import cache_check_node
@@ -13,9 +12,7 @@ from src.graph.nodes.cache_check import cache_check_node
 def build_graph():
     """Build RAG graph with conditional routing.
 
-    router -> generate (if chitchat)
-    router -> retrieve_docs -> generate (otherwise)
-    -> END
+    router -> cache_check -> retrieve_sql? -> retrieve_docs? -> generate -> groundedness
     """
     builder = StateGraph(RAGState)
 
@@ -23,7 +20,6 @@ def build_graph():
     builder.add_node("cache_check", cache_check_node)
     builder.add_node("retrieve_sql", retrieve_sql_node)
     builder.add_node("retrieve_docs", retrieve_docs_node)
-    builder.add_node("parallel_retrieve", parallel_retrieve_node)
     builder.add_node("generate", generate_node)
     builder.add_node("groundedness", groundedness_node)
 
@@ -33,26 +29,42 @@ def build_graph():
     def route_after_cache(state: RAGState) -> str:
         if getattr(state, "cache_hit", False):
             return "END"
-        if not getattr(state, "should_retrieve", True):
-            return "generate"
-        return "parallel_retrieve"
+        if getattr(state, "should_retrieve_sql", False):
+            return "retrieve_sql"
+        if getattr(state, "should_retrieve_docs", False):
+            return "retrieve_docs"
+        return "generate"
 
     builder.add_conditional_edges(
         "cache_check",
         route_after_cache,
         {
             "generate": "generate",
-            "parallel_retrieve": "parallel_retrieve",
+            "retrieve_sql": "retrieve_sql",
+            "retrieve_docs": "retrieve_docs",
             "END": END,
         },
     )
 
-    # Parallel retrieval collapses both retrieval steps into one
-    builder.add_edge("parallel_retrieve", "generate")
+    def route_after_sql(state: RAGState) -> str:
+        if getattr(state, "should_retrieve_docs", False):
+            return "retrieve_docs"
+        return "generate"
+
+    builder.add_conditional_edges(
+        "retrieve_sql",
+        route_after_sql,
+        {
+            "retrieve_docs": "retrieve_docs",
+            "generate": "generate",
+        },
+    )
+
+    builder.add_edge("retrieve_docs", "generate")
 
     # After generate, if we retrieved, run groundedness; else end
     def route_after_generate(state: RAGState) -> str:
-        if getattr(state, "should_retrieve", True):
+        if getattr(state, "docs", None):
             return "groundedness"
         return "END"
 
@@ -81,4 +93,3 @@ def build_graph():
     )
 
     return builder.compile()
-

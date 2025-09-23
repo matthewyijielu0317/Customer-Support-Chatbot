@@ -37,11 +37,8 @@ def _doc_to_state_dict(doc) -> Dict[str, Any]:
 
 
 def retrieve_docs_node(state: RAGState) -> RAGState:
-    """Retrieve top-3 relevant policy chunks from Pinecone into state.
-
-    Honors `state.should_retrieve` to optionally skip retrieval.
-    """
-    if not state.should_retrieve:
+    """Retrieve top-3 relevant policy chunks from Pinecone into state."""
+    if not state.should_retrieve_docs:
         state.docs = []
         state.citations = []
         return state
@@ -68,5 +65,4 @@ def retrieve_docs_node(state: RAGState) -> RAGState:
         )
     state.citations = citations
     return state
-
 

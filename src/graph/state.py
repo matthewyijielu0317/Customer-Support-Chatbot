@@ -13,11 +13,12 @@ class RAGState(BaseModel):
     """Typed state used across LangGraph nodes."""
 
     query: str
-    intent: Optional[str] = None
-    should_retrieve: bool = True
-    should_retrieve_sql: bool = True
-    should_retrieve_docs: bool = True
-    entities: Dict[str, Any] = Field(default_factory=dict)
+    query_type: Optional[str] = None
+    should_retrieve_sql: bool = False
+    should_retrieve_docs: bool = False
+    order_id: Optional[int] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
     docs: List[Dict[str, Any]] = Field(default_factory=list)
     sql_rows: List[Dict[str, Any]] = Field(default_factory=list)
     citations: List[Citation] = Field(default_factory=list)

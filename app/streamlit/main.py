@@ -99,10 +99,20 @@ def main() -> None:
     st.sidebar.subheader("Sessions")
     sessions = st.session_state.sessions
     if sessions:
-        session_labels = [
-            f"{s['session_id']} ({s.get('status', 'active')})" + (f"\nSummary: {s.get('summary', '')}" if s.get("summary") else "")
-            for s in sessions
-        ]
+        session_labels = []
+        for s in sessions:
+            # Use the readable session ID directly
+            session_id = s['session_id']
+            status = s.get('status', 'active')
+            
+            # Create the main label
+            label = f"{session_id} ({status})"
+            
+            # Add summary if available
+            if s.get("summary"):
+                label += f"\nSummary: {s.get('summary', '')}"
+            
+            session_labels.append(label)
         selected_idx = None
         if st.session_state.selected_session:
             for idx, s in enumerate(sessions):

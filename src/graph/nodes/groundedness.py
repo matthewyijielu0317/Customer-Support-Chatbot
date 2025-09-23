@@ -1,40 +1,18 @@
 from __future__ import annotations
 
-from typing import List
-
-from openai import OpenAI
-import os
-
-from src.config.settings import settings
 from src.graph.state import RAGState
-
-
-_client = OpenAI(api_key=(settings.openai_api_key or os.getenv("OPENAI_API_KEY", "")))
-
-
-def _format_context(docs: List[dict]) -> str:
-    lines: List[str] = []
-    for i, d in enumerate(docs, start=1):
-        title = d.get("title") or ""
-        source = d.get("source") or ""
-        page = d.get("page")
-        header = f"[{i}] {title} — {source}".strip()
-        if page is not None:
-            header += f" (p.{page})"
-        text = (d.get("text") or "").strip()
-        if text:
-            lines.append(header + "\n" + text)
-    return "\n\n".join(lines)
+from src.utils.text import format_context_sections
+from src.utils.openai_client import get_openai_client
 
 
 def groundedness_node(state: RAGState) -> RAGState:
-    # If we didn't retrieve, skip checking
-    if not state.should_retrieve:
+    # If we have no document context, skip checking
+    if not state.docs:
         state.grounded = None
         state.grounded_explanation = None
         return state
 
-    context = _format_context(state.docs or [])
+    context = format_context_sections(state.docs or [])
     answer = (state.answer or "").strip()
     if not answer:
         state.grounded = False
@@ -52,8 +30,11 @@ def groundedness_node(state: RAGState) -> RAGState:
         "Respond in the format: <VERDICT> - <short reason>."
     )
 
+    client = get_openai_client()
     try:
-        resp = _client.chat.completions.create(
+        if client is None:
+            raise RuntimeError("OpenAI client is not configured")
+        resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system},
@@ -71,5 +52,3 @@ def groundedness_node(state: RAGState) -> RAGState:
         state.grounded_explanation = f"Groundedness judge failed: {exc}"
 
     return state
-
-

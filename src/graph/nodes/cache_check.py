@@ -47,12 +47,16 @@ def cache_check_node(state: RAGState) -> RAGState:
     entry = cache.similar(query)
     if entry:
         state.cache_hit = True
-        state.should_retrieve = False
         state.answer = entry.get("answer") or ""
         state.citations = _to_citations(entry.get("citations"))
+        qtype = entry.get("query_type")
+        if qtype:
+            state.query_type = qtype
         trace = entry.get("trace_id")
         if trace:
             state.trace_id = trace
+        state.should_retrieve_docs = False
+        state.should_retrieve_sql = False
         return state
 
     state.should_cache = True

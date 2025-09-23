@@ -5,14 +5,15 @@ from uuid import uuid4
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 
-from app.api.deps import get_mongo, get_session_store, get_semantic_cache
-from src.cache.redis_kv import RedisSessionStore
+from app.api.deps import get_session_store, get_semantic_cache
 from src.cache.pinecone_semantic import PineconeSemanticCache
-from src.db.mongo import Mongo
+from src.persistence.redis import RedisSessionStore
 from src.graph.graph import build_graph
 from src.graph.state import RAGState
 from src.config.settings import settings
 from src.utils.summarize import summarize_messages
+from src.utils.names import derive_name_from_email
+from src.utils.ids import generate_readable_session_id
 
 
 router = APIRouter(tags=["chat"])
@@ -45,7 +46,6 @@ _graph = build_graph()
 async def chat_endpoint(
     payload: ChatRequest,
     session_store: RedisSessionStore = Depends(get_session_store),
-    mongo: Mongo = Depends(get_mongo),
     semantic_cache: PineconeSemanticCache = Depends(get_semantic_cache),
 ) -> ChatResponse:
     if not payload.user_id:
@@ -53,26 +53,68 @@ async def chat_endpoint(
     if not payload.query:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="query is required")
 
-    session_id = payload.session_id or str(uuid4())
-
-    existing_session = mongo.get_session(session_id)
-    if existing_session and existing_session.get("user_id") not in (None, payload.user_id):
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session does not belong to user")
-
-    mongo.create_session(session_id, payload.user_id)
+    session_id = payload.session_id or generate_readable_session_id(payload.user_id)
 
     meta = session_store.read_session_meta(session_id)
+    now = datetime.now(timezone.utc)
     if meta:
         stored_user = meta.get("user_id")
         if stored_user and stored_user != payload.user_id:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session does not belong to user")
     else:
-        session_store.write_session_meta(session_id, {"user_id": payload.user_id})
+        meta = {
+            "user_id": payload.user_id,
+            "status": "active",
+            "created_at": now.isoformat(),
+            "message_count": 0,
+            "summary_message_count": 0,
+            "greeting_sent": False,
+        }
+        session_store.write_session_meta(session_id, meta)
+        session_store.register_session(session_id, payload.user_id)
+
+    first_name = meta.get("first_name")
+    last_name = meta.get("last_name")
+    meta_dirty = False
+    if not first_name and not last_name:
+        derived_first, derived_last = derive_name_from_email(payload.user_id)
+        if derived_first:
+            meta["first_name"] = derived_first
+            first_name = derived_first
+            meta_dirty = True
+        if derived_last:
+            meta["last_name"] = derived_last
+            last_name = derived_last
+            meta_dirty = True
+
+    if not meta.get("greeting_sent"):
+        greeting_name = first_name or "there"
+        greeting_text = f"Hello {greeting_name}, how can I assist you today!"
+        greeting_ts = datetime.now(timezone.utc)
+        session_store.append_message(
+            session_id,
+            {
+                "role": "assistant",
+                "content": greeting_text,
+                "created_at": greeting_ts.isoformat(),
+            },
+        )
+        meta.update(
+            {
+                "greeting_sent": True,
+                "last_response": greeting_text,
+                "last_updated": greeting_ts.isoformat(),
+                "message_count": int(meta.get("message_count", 0)) + 1,
+            }
+        )
+        meta_dirty = True
+
+    if meta_dirty:
+        session_store.write_session_meta(session_id, meta)
 
     recent_messages = session_store.get_recent_messages(session_id)
-    summary_doc = mongo.get_session_summary_doc(session_id)
-    session_summary = summary_doc.get("summary") if summary_doc else None
-    summary_message_count = summary_doc.get("message_count", 0) if summary_doc else 0
+    session_summary = meta.get("session_summary")
+    summary_message_count = int(meta.get("summary_message_count") or 0)
 
     state = RAGState(
         query=payload.query,
@@ -81,6 +123,8 @@ async def chat_endpoint(
         recent_messages=recent_messages,
         session_summary=session_summary,
         semantic_cache=semantic_cache,
+        first_name=meta.get("first_name"),
+        last_name=meta.get("last_name"),
     )
     out = _graph.invoke(state)
 
@@ -112,7 +156,6 @@ async def chat_endpoint(
         session_id,
         {"role": "user", "content": payload.query, "created_at": now.isoformat()},
     )
-    mongo.append_message(session_id, "user", payload.query, user_id=payload.user_id, created_at=now)
 
     answer = str(out_dict.get("answer") or "")
     assistant_ts = datetime.now(timezone.utc)
@@ -120,39 +163,39 @@ async def chat_endpoint(
         session_id,
         {"role": "assistant", "content": answer, "created_at": assistant_ts.isoformat()},
     )
-    mongo.append_message(session_id, "assistant", answer, user_id=payload.user_id, created_at=assistant_ts)
-
-    session_store.write_session_meta(
-        session_id,
+    meta_message_count = int(meta.get("message_count", 0)) + 2
+    meta.update(
         {
             "user_id": payload.user_id,
             "last_query": payload.query,
             "last_response": answer,
             "last_updated": assistant_ts.isoformat(),
-        },
+            "message_count": meta_message_count,
+        }
     )
 
-    total_messages = mongo.count_messages(session_id)
-    if total_messages >= settings.session_summary_min_messages and total_messages > summary_message_count:
-        history_limit = settings.session_summary_history_limit
-        history_docs = mongo.get_messages(session_id, limit=history_limit)
+    if (
+        meta_message_count >= settings.session_summary_min_messages
+        and meta_message_count > summary_message_count
+    ):
+        history_limit = settings.session_summary_history_limit * 2
+        history_messages = session_store.get_all_messages(session_id, limit=history_limit)
         summary_payload = [
             {
-                "role": doc.get("role", "user"),
-                "content": (doc.get("content") or ""),
+                "role": msg.get("role", "user"),
+                "content": (msg.get("content") or ""),
             }
-            for doc in history_docs
-            if doc.get("content")
+            for msg in history_messages
+            if msg.get("content")
         ]
         if summary_payload:
             summary_text = summarize_messages(summary_payload, max_length=settings.session_summary_max_chars)
             if summary_text:
-                mongo.upsert_session_summary(
-                    session_id,
-                    summary_text,
-                    user_id=payload.user_id,
-                    message_count=total_messages,
-                )
+                meta["session_summary"] = summary_text
+                meta["summary_message_count"] = meta_message_count
+
+    session_store.write_session_meta(session_id, meta)
+    session_store.touch_session(session_id)
 
     cache_hit = bool(out_dict.get("cache_hit", False))
 

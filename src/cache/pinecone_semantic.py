@@ -123,7 +123,7 @@ class PineconeSemanticCache:
                 "query": metadata.get("query"),
                 "answer": metadata.get("answer"),
                 "citations": citations,
-                "intent": metadata.get("intent"),
+                "query_type": metadata.get("query_type"),
                 "trace_id": metadata.get("trace_id"),
                 "created_at": metadata.get("created_at"),
                 "similarity": score,
@@ -151,7 +151,7 @@ class PineconeSemanticCache:
             "query": query_text,
             "answer": payload.get("answer"),
             "citations": citations_json,
-            "intent": payload.get("intent"),
+            "query_type": payload.get("query_type"),
             "trace_id": payload.get("trace_id"),
             "created_at": payload.get("created_at") or _now_iso(),
         }

@@ -4,9 +4,9 @@ from fastapi.testclient import TestClient
 
 from app.api.main import create_app
 from app.api.deps import get_mongo, get_session_store, get_semantic_cache
-from src.cache.redis_kv import RedisKV, RedisSessionStore
 from src.cache.pinecone_semantic import PineconeSemanticCache
-from src.db.mongo import Mongo
+from src.persistence.redis import RedisKV, RedisSessionStore
+from src.persistence.mongo import Mongo
 from tests.test_session_memory import FakeMongoClient, FakeRedis
 from tests.utils.pinecone_stubs import FakeOpenAI, FakePineconeClient
 
@@ -65,10 +65,16 @@ def test_session_crud_endpoints():
     assert len(sessions) == 1
     assert sessions[0]["session_id"] == session_id
     assert sessions[0]["metadata"]["channel"] == "web"
-    assert "summary" in sessions[0]
+    assert sessions[0]["status"] == "active"
 
-    mongo.append_message(session_id, "user", "Hi", user_id="alice")
-    mongo.append_message(session_id, "assistant", "Hello", user_id="alice")
+    session_store.append_message(
+        session_id,
+        {"role": "user", "content": "Hi", "created_at": "2024-01-01T00:00:00+00:00"},
+    )
+    session_store.append_message(
+        session_id,
+        {"role": "assistant", "content": "Hello", "created_at": "2024-01-01T00:00:01+00:00"},
+    )
 
     messages_resp = client.get(
         f"/v1/sessions/{session_id}/messages",
@@ -92,6 +98,11 @@ def test_session_crud_endpoints():
     )
     assert close_resp.status_code == 200
     assert close_resp.json()["status"] == "closed"
+
+    assert session_store.read_session_meta(session_id) is None
+    archived_messages = mongo.get_messages(session_id)
+    assert len(archived_messages) == 2
+    assert archived_messages[0]["role"] == "user"
 
     closed_list = client.get(
         "/v1/sessions",

@@ -6,10 +6,10 @@ from unittest.mock import patch
 from app.api.main import create_app
 from app.api.deps import get_mongo, get_session_store, get_semantic_cache
 from app.api.routes import chat as chat_module
-from src.cache.redis_kv import RedisKV, RedisSessionStore
 from src.cache.pinecone_semantic import PineconeSemanticCache
+from src.persistence.redis import RedisKV, RedisSessionStore
 from src.graph.state import Citation
-from src.db.mongo import Mongo
+from src.persistence.mongo import Mongo
 from tests.test_session_memory import FakeMongoClient, FakeRedis
 from tests.utils.pinecone_stubs import FakeOpenAI, FakePineconeClient
 
@@ -20,8 +20,7 @@ class DummyGraph:
 
     def invoke(self, state):  # type: ignore[no-untyped-def]
         # Simulate router decision: docs only
-        state.intent = "returns_exchanges"
-        state.should_retrieve = True
+        state.query_type = "policy_only"
         state.should_retrieve_docs = True
         state.should_retrieve_sql = False
 
@@ -48,7 +47,7 @@ class DummyGraph:
                 {
                     "answer": state.answer,
                     "citations": [c.model_dump() for c in state.citations],
-                    "intent": state.intent,
+                    "query_type": state.query_type,
                     "trace_id": state.trace_id,
                 },
                 query=state.query,
@@ -112,15 +111,18 @@ def test_chat_endpoint_creates_and_updates_session():
         session_id = payload["session_id"]
         assert graph.states[0].user_id == "alice"
         assert graph.states[0].session_id == session_id
-        assert graph.states[0].recent_messages == []
+        assert len(graph.states[0].recent_messages) == 1
+        assert graph.states[0].recent_messages[0]["role"] == "assistant"
 
         redis_messages = session_store.get_recent_messages(session_id)
-        assert len(redis_messages) == 2
-        assert redis_messages[0]["role"] == "user"
-        assert redis_messages[1]["role"] == "assistant"
+        assert len(redis_messages) == 3
+        assert redis_messages[0]["role"] == "assistant"
+        assert redis_messages[0]["content"] == "Hello Alice, how can I assist you today!"
+        assert redis_messages[1]["role"] == "user"
+        assert redis_messages[2]["role"] == "assistant"
 
         mongo_history = mongo.get_messages(session_id)
-        assert [m["role"] for m in mongo_history] == ["user", "assistant"]
+        assert mongo_history == []
 
         response_two = client.post(
             "/v1/chat",
@@ -133,11 +135,10 @@ def test_chat_endpoint_creates_and_updates_session():
         assert len(graph.states) == 1
 
         redis_messages_after = session_store.get_recent_messages(session_id)
-        assert len(redis_messages_after) == 4
+        assert len(redis_messages_after) == 5
 
         history_after = mongo.get_messages(session_id)
-        assert len(history_after) == 4
-        assert history_after[-1]["role"] == "assistant"
+        assert history_after == []
 
         # Session reuse by different user should be denied
         forbidden = client.post(

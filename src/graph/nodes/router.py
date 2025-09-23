@@ -1,48 +1,55 @@
 from __future__ import annotations
 
+import re
 from typing import Literal
-
-from openai import OpenAI
-import os
 
 from src.config.settings import settings
 from src.graph.state import RAGState
 from src.graph.nodes.retrieve_sql import _extract_entities
+from src.utils.openai_client import get_openai_client
 
 
-IntentType = Literal[
-    "payments_billing",
-    "returns_exchanges",
-    "shipping_delivery",
-    "order_management",
-    "customer_account",
-    "product_information",
+QueryType = Literal[
     "chitchat",
+    "policy_only",
+    "needs_identifier",
+    "order_lookup",
+    "billing_issue",
+    "escalation",
 ]
 
+_POLICY_SUMMARY = (
+    "Policies available for reference: Customer_Account_Management_Policy.pdf (account access and profile updates), "
+    "Returns_and_Exchanges_Policy.pdf (return windows and processes), Shipping_and_Delivery_Policy.pdf (shipping methods and delays), "
+    "Order_Management_Guide.pdf (order status, cancellations), Payment_and_Billing_Policy.pdf (charges, refunds, invoices), "
+    "Product_Information_Guide.pdf (product specs and availability)."
+)
 
-_client = OpenAI(api_key=(settings.openai_api_key or os.getenv("OPENAI_API_KEY", "")))
 
-
-def _classify_intent_llm(query: str) -> str | None:
-    labels = (
-        "payments_billing | returns_exchanges | shipping_delivery | order_management | "
-        "customer_account | product_information | chitchat"
-    )
+def _classify_query_type_llm(query: str) -> str | None:
+    labels = "chitchat | policy_only | needs_identifier | order_lookup | billing_issue | escalation"
     system = (
-        "You classify customer queries into one of a fixed set of intents. "
-        "Choose the single most relevant label and reply with ONLY that label."
+        "You classify customer support queries for an e-commerce assistant into one label. "
+        "Choose exactly one of the allowed labels and answer with ONLY that label.\n\n"
+        "Label guide:\n"
+        "- chitchat: greetings or small talk.\n"
+        "- policy_only: general questions about returns, shipping, accounts, or products with no specific order/account identifiers.\n"
+        "- needs_identifier: user is asking about an order but has not provided an order number yet.\n"
+        "- order_lookup: user supplied an order number and wants order status/details.\n"
+        "- billing_issue: double charges, refunds, or payment problems that typically require transaction lookups plus policy context.\n"
+        "- escalation: explicit request for a human agent, supervisor, or complaint escalation.\n\n"
+        f"{_POLICY_SUMMARY}"
     )
     user = (
-        "Categories: payments_billing (payments, billing, refunds policy scope), returns_exchanges (return windows, exchanges), "
-        "shipping_delivery (shipping methods, delivery timing), order_management (order status, cancellations, modifications), "
-        "customer_account (login, password, profile, addresses), product_information (product details, specs, availability), chitchat (greetings, small talk).\n"
         f"Valid labels: {labels}.\n"
-        f"Query: {query}\n"
-        "Answer with ONE label from the list exactly."
+        f"User query: {query}\n"
+        "Respond with the single best label only."
     )
+    client = get_openai_client()
+    if client is None:
+        return None
     try:
-        resp = _client.chat.completions.create(
+        resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system},
@@ -52,120 +59,106 @@ def _classify_intent_llm(query: str) -> str | None:
             max_tokens=10,
         )
         label = (resp.choices[0].message.content or "").strip().lower()
-        # Normalize common variants
-        norm = {
-            "payments": "payments_billing",
-            "billing": "payments_billing",
-            "payment": "payments_billing",
-            "returns": "returns_exchanges",
-            "exchanges": "returns_exchanges",
-            "shipping": "shipping_delivery",
-            "delivery": "shipping_delivery",
-            "order": "order_management",
-            "account": "customer_account",
-            "product": "product_information",
-        }
-        label = norm.get(label, label)
         allowed = {
-            "payments_billing",
-            "returns_exchanges",
-            "shipping_delivery",
-            "order_management",
-            "customer_account",
-            "product_information",
             "chitchat",
+            "policy_only",
+            "needs_identifier",
+            "order_lookup",
+            "billing_issue",
+            "escalation",
         }
         return label if label in allowed else None
     except Exception:
         return None
 
 
-def _classify_intent_fallback(query: str) -> IntentType:
+def _classify_query_type_fallback(query: str) -> QueryType:
     q = (query or "").strip().lower()
     if any(k in q for k in ["hi", "hello", "hey", "thank you", "thanks", "how are you"]):
         return "chitchat"
-    if any(k in q for k in ["refund", "return", "exchange"]):
-        return "returns_exchanges"
-    if any(k in q for k in ["ship", "delivery", "deliver", "tracking", "track"]):
-        return "shipping_delivery"
-    if any(k in q for k in ["order", "cancel", "modify", "change order"]):
-        return "order_management"
+    if any(k in q for k in ["agent", "representative", "escalate", "supervisor", "complaint"]):
+        return "escalation"
+    if any(k in q for k in ["refund", "charge", "billing", "payment", "invoice", "credit card", "double charge"]):
+        return "billing_issue"
+    if any(k in q for k in ["order", "tracking", "track", "shipment", "delivery", "package"]):
+        return "order_lookup"
     if any(k in q for k in ["account", "password", "login", "profile", "address"]):
-        return "customer_account"
-    if any(k in q for k in ["payment", "billing", "invoice", "charge"]):
-        return "payments_billing"
-    if any(k in q for k in ["product", "spec", "availability", "detail"]):
-        return "product_information"
-    return "product_information"
+        return "policy_only"
+    if any(k in q for k in ["return", "exchange", "shipping", "policy", "product", "spec", "availability"]):
+        return "policy_only"
+    return "policy_only"
 
 
-def classify_intent(query: str) -> IntentType:
-    label = _classify_intent_llm(query)
+def classify_query_type(query: str) -> QueryType:
+    label = _classify_query_type_llm(query)
     if label is not None:
         return label  # type: ignore[return-value]
-    return _classify_intent_fallback(query)
+    return _classify_query_type_fallback(query)
 
 
-def predict_intent_debug(query: str) -> dict:
-    label = _classify_intent_llm(query)
+def predict_query_type_debug(query: str) -> dict:
+    label = _classify_query_type_llm(query)
     if label is not None:
-        return {"source": "llm", "intent": label}
-    fb = _classify_intent_fallback(query)
-    return {"source": "fallback", "intent": fb}
-
-
-def decide_should_retrieve(query: str, intent: str) -> bool:
-    return intent != "chitchat"
+        return {"source": "llm", "query_type": label}
+    fb = _classify_query_type_fallback(query)
+    return {"source": "fallback", "query_type": fb}
 
 
 def router_node(state: RAGState) -> RAGState:
-    intent = classify_intent(state.query)
-    state.intent = intent
-    # Initialize flags
+    query = state.query
     state.should_retrieve_sql = False
     state.should_retrieve_docs = False
+    state.should_escalate = False
 
-    # Early exit for chitchat: no retrieval
-    if intent == "chitchat":
-        state.should_retrieve = False
+    entities = _extract_entities(query)
+    order_id = entities.get("order_id")
+    if order_id is not None:
+        try:
+            state.order_id = int(order_id)
+        except (TypeError, ValueError):
+            state.order_id = None
+    has_identifier = bool(state.order_id)
+
+    query_type = classify_query_type(query)
+
+    if has_identifier:
+        query_type = "order_lookup"
+
+    if query_type == "order_lookup" and not has_identifier:
+        query_type = "needs_identifier"
+    if query_type in {"order_lookup", "billing_issue"} and not settings.postgres_dsn:
+        query_type = "policy_only" if query_type == "billing_issue" else "needs_identifier"
+
+    state.query_type = query_type
+
+    q_lower = (query or "").strip().lower()
+
+    if query_type == "chitchat":
         return state
 
-    q = (state.query or "").strip().lower()
-    entities = _extract_entities(state.query)
-    state.entities.update(entities)
-    has_identifier = bool(entities.get("order_id") or entities.get("customer_email") or entities.get("product_id"))
-    has_dsn = bool(settings.postgres_dsn)
+    if query_type == "escalation":
+        state.should_escalate = True
+        return state
 
-    # Policy-centric intents: docs only
-    if intent in {"returns_exchanges", "shipping_delivery", "customer_account", "product_information"}:
+    if query_type == "policy_only":
         state.should_retrieve_docs = True
-        state.should_retrieve_sql = False
+        return state
 
-    # Order management: prefer SQL, require identifier; if none, ask clarifying (no retrieval)
-    elif intent == "order_management":
-        if has_dsn and has_identifier:
+    if query_type == "needs_identifier":
+        return state
+
+    if query_type == "order_lookup":
+        if has_identifier and settings.postgres_dsn:
             state.should_retrieve_sql = True
-            state.should_retrieve_docs = False
-        else:
-            state.should_retrieve_sql = False
-            state.should_retrieve_docs = False
+            if any(k in q_lower for k in ["refund", "policy", "return", "late", "delay", "delivery"]):
+                state.should_retrieve_docs = True
+        return state
 
-    # Payments/billing: policy often relevant and SQL helpful if identifiers present
-    elif intent == "payments_billing":
-        if has_dsn and has_identifier:
-            state.should_retrieve_sql = True
-            state.should_retrieve_docs = True
-        else:
-            state.should_retrieve_sql = False
-            state.should_retrieve_docs = True
-
-    # Fallback: docs
-    else:
+    if query_type == "billing_issue":
         state.should_retrieve_docs = True
-        state.should_retrieve_sql = False
+        if settings.postgres_dsn and has_identifier:
+            state.should_retrieve_sql = True
+        return state
 
-    # should_retrieve governs groundedness check and overall retrieval
-    state.should_retrieve = bool(state.should_retrieve_sql or state.should_retrieve_docs)
+    state.should_retrieve_docs = True
     return state
-
-

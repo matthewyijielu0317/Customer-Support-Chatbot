@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timezone
 from types import SimpleNamespace
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 try:  # pragma: no cover - runtime dependency
     import redis
@@ -59,6 +59,19 @@ class RedisKV:
     def pipeline(self) -> redis.client.Pipeline:
         return self.client.pipeline()
 
+    def sadd(self, key: str, *values: str) -> int:
+        return self.client.sadd(key, *values)
+
+    def smembers(self, key: str) -> Set[str]:
+        members = self.client.smembers(key)
+        # redis-py returns set of bytes/str depending on decode
+        if isinstance(members, set):
+            return {str(m) for m in members}
+        return set()
+
+    def srem(self, key: str, value: str) -> None:
+        self.client.srem(key, value)
+
 
 class RedisSessionStore:
     """Redis-backed storage for session metadata and recent message buffers."""
@@ -109,15 +122,14 @@ class RedisSessionStore:
         meta_key = self._meta_key(session_id)
         with self.kv.pipeline() as pipe:
             pipe.lpush(messages_key, serialized)
-            if self.recent_window:
-                pipe.ltrim(messages_key, 0, self.recent_window - 1)
             if self.ttl_seconds:
                 pipe.expire(messages_key, self.ttl_seconds)
                 pipe.expire(meta_key, self.ttl_seconds)
             pipe.execute()
 
     def get_recent_messages(self, session_id: str) -> List[Dict[str, Any]]:
-        raw_items = self.kv.lrange(self._messages_key(session_id), 0, self.recent_window - 1)
+        end = self.recent_window - 1 if self.recent_window else -1
+        raw_items = self.kv.lrange(self._messages_key(session_id), 0, end)
         messages: List[Dict[str, Any]] = []
         for item in raw_items:
             try:
@@ -126,6 +138,42 @@ class RedisSessionStore:
                 continue
         # Redis LPUSH stores newest first; reverse to chronological order
         return list(reversed(messages))
+
+    def get_all_messages(self, session_id: str, limit: Optional[int] = None) -> List[Dict[str, Any]]:
+        if limit is not None and limit <= 0:
+            return []
+        end = -1 if limit is None else limit - 1
+        raw_items = self.kv.lrange(self._messages_key(session_id), 0, end)
+        messages: List[Dict[str, Any]] = []
+        for item in raw_items:
+            try:
+                messages.append(json.loads(item))
+            except json.JSONDecodeError:
+                continue
+        return list(reversed(messages))
+
+    @staticmethod
+    def _user_sessions_key(user_id: str) -> str:
+        return f"user_sessions:{user_id}"
+
+    def register_session(self, session_id: str, user_id: str) -> None:
+        if not user_id:
+            return
+        self.kv.sadd(self._user_sessions_key(user_id), session_id)
+
+    def unregister_session(self, session_id: str, user_id: str) -> None:
+        if not user_id:
+            return
+        self.kv.srem(self._user_sessions_key(user_id), session_id)
+
+    def list_sessions(self, user_id: str) -> List[Dict[str, Any]]:
+        session_ids = sorted(self.kv.smembers(self._user_sessions_key(user_id)))
+        metas: List[Dict[str, Any]] = []
+        for sid in session_ids:
+            meta = self.read_session_meta(sid)
+            if meta:
+                metas.append(meta)
+        return metas
 
     def touch_session(self, session_id: str) -> None:
         if not self.ttl_seconds:

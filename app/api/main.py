@@ -4,9 +4,9 @@ from fastapi import FastAPI, Request
 from app.api.routes import chat, ingest_docs, ingest_tabular, sessions
 from src.config.logging import configure_logging
 from src.config.settings import settings
-from src.cache.redis_kv import RedisKV, RedisSessionStore
 from src.cache.pinecone_semantic import PineconeSemanticCache
-from src.db.mongo import Mongo
+from src.persistence.mongo import Mongo
+from src.persistence.redis import RedisKV, RedisSessionStore
 
 
 @asynccontextmanager

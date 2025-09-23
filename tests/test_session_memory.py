@@ -5,8 +5,8 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from typing import Any, Dict, Iterable, List, Optional
 
-from src.cache.redis_kv import RedisKV, RedisSessionStore
-from src.db.mongo import Mongo, ObjectId, ReturnDocument
+from src.persistence.redis import RedisKV, RedisSessionStore
+from src.persistence.mongo import Mongo, ObjectId, ReturnDocument
 
 
 class FakePipeline:

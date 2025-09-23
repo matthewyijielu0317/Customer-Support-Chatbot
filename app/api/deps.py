@@ -2,9 +2,9 @@ from typing import Callable
 
 from fastapi import Request
 from src.config.settings import Settings, settings
-from src.cache.redis_kv import RedisKV, RedisSessionStore
 from src.cache.pinecone_semantic import PineconeSemanticCache
-from src.db.mongo import Mongo
+from src.persistence.mongo import Mongo
+from src.persistence.redis import RedisKV, RedisSessionStore
 
 
 def get_settings() -> Settings:

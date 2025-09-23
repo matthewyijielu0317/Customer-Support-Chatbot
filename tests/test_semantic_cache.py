@@ -22,7 +22,7 @@ def test_semantic_cache_upsert_and_hit():
         {
             "answer": "Your order is on the way",
             "citations": [{"source": "doc#1"}],
-            "intent": "order_management",
+            "query_type": "order_lookup",
         },
         query="Where is my order?",
     )
@@ -31,7 +31,7 @@ def test_semantic_cache_upsert_and_hit():
     assert hit is not None
     assert hit["answer"] == "Your order is on the way"
     assert hit["citations"][0]["source"] == "doc#1"
-    assert hit["intent"] == "order_management"
+    assert hit["query_type"] == "order_lookup"
 
 
 def test_semantic_cache_respects_user_scope():

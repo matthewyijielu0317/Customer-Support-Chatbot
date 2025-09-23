@@ -2,38 +2,21 @@ from __future__ import annotations
 
 from typing import List, Sequence, Any, Optional
 
-from openai import OpenAI
-import os
-
 from src.config.settings import settings
 from src.graph.state import RAGState, Citation
-
-
-_client = OpenAI(api_key=(settings.openai_api_key or os.getenv("OPENAI_API_KEY", "")))
-
-
-def _format_context(docs: List[dict]) -> str:
-    lines: List[str] = []
-    for i, d in enumerate(docs, start=1):
-        title = d.get("title") or ""
-        source = d.get("source") or ""
-        page = d.get("page")
-        header = f"[{i}] {title} — {source}".strip()
-        if page is not None:
-            header += f" (p.{page})"
-        text = (d.get("text") or "").strip()
-        if text:
-            lines.append(header + "\n" + text)
-    return "\n\n".join(lines)
+from src.utils.text import format_context_sections
+from src.utils.openai_client import get_openai_client
 
 
 def generate_node(state: RAGState) -> RAGState:
-    intent = state.intent or "policy_qna"
-    context = _format_context(state.docs or [])
+    query_type = state.query_type or "policy_only"
+    context = format_context_sections(state.docs or [])
     sql_rows = state.sql_rows or []
     order_rows = [row for row in sql_rows if isinstance(row, dict) and "order_id" in row]
     session_summary = (state.session_summary or "").strip()
     recent_messages = state.recent_messages or []
+    first_name = (state.first_name or "").strip()
+    last_name = (state.last_name or "").strip()
 
     def _mask_email(email: str) -> str:
         try:
@@ -101,14 +84,26 @@ def generate_node(state: RAGState) -> RAGState:
     feedback = (state.grounded_explanation or "").strip() if state.grounded is False else ""
     feedback_block = f"\n\nGroundedness feedback: {feedback}\nPlease revise to be strictly supported by the context above." if feedback else ""
 
-    if order_rows:
-        state.answer = _format_order_response(order_rows)
-        state.should_retrieve = False
+    if query_type == "needs_identifier" and state.order_id is None:
+        if first_name:
+            state.answer = f"{first_name}, could you share the order number so I can take a look?"
+        else:
+            state.answer = "Please share the order number so I can check the details."
         return state
 
+    if order_rows:
+        state.answer = _format_order_response(order_rows)
+        return state
+
+    user_profile = "[no user profile]"
+    if first_name or last_name:
+        user_profile = (f"{first_name} {last_name}").strip()
+
     user_prompt = (
-        f"User intent: {intent}.\n"
+        f"Query type: {query_type}.\n"
         f"User question: {state.query}\n\n"
+        f"Known user: {user_profile}\n"
+        f"Order id noted: {state.order_id if state.order_id is not None else '[not provided]'}\n"
         f"Session summary: {session_summary if session_summary else '[no prior summary]'}\n\n"
         f"Recent conversation:\n{_format_recent(recent_messages)}\n\n"
         f"Database facts (authoritative, concise):\n{_format_sql(sql_rows)}\n\n"
@@ -116,8 +111,11 @@ def generate_node(state: RAGState) -> RAGState:
         "Answer:"
     )
 
+    client = get_openai_client()
     try:
-        resp = _client.chat.completions.create(
+        if client is None:
+            raise RuntimeError("OpenAI client is not configured")
+        resp = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
@@ -151,7 +149,7 @@ def generate_node(state: RAGState) -> RAGState:
         cache_payload = {
             "answer": state.answer,
             "citations": citations_payload,
-            "intent": state.intent,
+            "query_type": state.query_type,
             "trace_id": state.trace_id,
             "metadata": {"session_id": state.session_id},
         }

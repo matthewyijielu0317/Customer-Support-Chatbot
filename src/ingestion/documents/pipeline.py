@@ -17,14 +17,14 @@ except ImportError:
         SemanticChunker = None
         SEMANTIC_CHUNKER_AVAILABLE = False
 
-from src.ingestion.loaders import (
+from .loaders import (
     load_from_url,
     load_from_pdf_dir,
     load_from_pdf_file,
     load_from_txt,
     load_from_docx,
 )
-from src.ingestion.preprocess import preprocess_documents
+from .preprocess import preprocess_documents
 from src.vectorstores.pinecone_store import PineconeStore
 from src.config.settings import settings
 
@@ -167,111 +167,3 @@ def ingest_files_with_preprocessing(file_sources: List[str], namespace: str | No
     print(f"Total vectors upserted: {n}")
     
     return n
-
-
-if __name__ == "__main__":
-    import argparse
-    import glob
-    import os
-    
-    parser = argparse.ArgumentParser(description="Run files ingestion pipeline")
-    parser.add_argument(
-        "--namespace", 
-        default="docs-v2", 
-        help="Pinecone namespace for this version (default: docs-v2)"
-    )
-    
-    # Create mutually exclusive group for input source
-    input_group = parser.add_mutually_exclusive_group(required=False)
-    input_group.add_argument(
-        "--data-dir",
-        default="/Users/yijielu/Desktop/customer_support_chatbot/data",
-        help="Directory containing document files (processes all supported files)"
-    )
-    input_group.add_argument(
-        "--files",
-        nargs="+",
-        help="Specific file(s) to process (space-separated list of file paths)"
-    )
-    
-    args = parser.parse_args()
-    
-    print("Document Ingestion Pipeline")
-    print("=" * 50)
-    
-    # Determine input source and get files
-    if args.files:
-        # Specific files provided
-        all_files = args.files
-        print(f"Processing specific files: {len(all_files)} file(s)")
-        
-        # Validate that files exist
-        missing_files = [f for f in all_files if not os.path.exists(f)]
-        if missing_files:
-            print(f"❌ The following files were not found:")
-            for f in missing_files:
-                print(f"  - {f}")
-            exit(1)
-            
-    else:
-        # Directory mode (default)
-        data_dir = args.data_dir
-        print(f"Data directory: {data_dir}")
-        
-        # Get all supported files from directory
-        pdf_files = glob.glob(os.path.join(data_dir, "*.pdf"))
-        txt_files = glob.glob(os.path.join(data_dir, "*.txt"))
-        docx_files = glob.glob(os.path.join(data_dir, "*.docx"))
-        all_files = pdf_files + txt_files + docx_files
-        
-        if not all_files:
-            print(f"❌ No supported files found in {data_dir}")
-            print("Supported formats: .pdf, .txt, .docx")
-            exit(1)
-    
-    print(f"Namespace: {args.namespace}")
-    print("=" * 50)
-    
-    print(f"Found {len(all_files)} files to process:")
-    for file_path in sorted(all_files):
-        if file_path.endswith('.pdf'):
-            file_type = "📄"
-        elif file_path.endswith('.docx'):
-            file_type = "📝"
-        else:  # .txt
-            file_type = "📋"
-        print(f"  {file_type} {os.path.basename(file_path)}")
-    
-    print(f"\nPipeline steps:")
-    print(f"  1. 📄 Load documents (PDFs, Word docs, text files)")
-    print(f"  2. 🧹 Preprocess (remove headers/footers, normalize text)")
-    print(f"  3. 🧩 Semantic chunking (OpenAI embeddings)")
-    print(f"  4. 🗃️ Store in Pinecone (namespace: {args.namespace})")
-    
-    try:
-        # Run the complete pipeline
-        print(f"\nStarting pipeline...")
-        total_vectors = ingest_files_with_preprocessing(
-            file_sources=all_files,
-            namespace=args.namespace,
-            semantic=True
-        )
-        
-        print(f"\n🎉 SUCCESS!")
-        # Count file types for summary
-        pdf_count = sum(1 for f in all_files if f.endswith('.pdf'))
-        txt_count = sum(1 for f in all_files if f.endswith('.txt'))
-        docx_count = sum(1 for f in all_files if f.endswith('.docx'))
-        
-        print(f"✅ Processed {len(all_files)} files ({pdf_count} PDFs, {txt_count} text files, {docx_count} Word docs)")
-        print(f"✅ Created {total_vectors} vectors")
-        print(f"✅ Stored in namespace: '{args.namespace}'")
-        
-        print(f"\nNext steps:")
-        print(f"  • Use namespace '{args.namespace}' for queries")
-        print(f"  • Test with your chatbot application")
-        
-    except Exception as e:
-        print(f"\n❌ Pipeline failed: {e}")
-        print("Please check your API keys and configuration.")
-        exit(1)
