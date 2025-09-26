@@ -25,9 +25,9 @@ def test_retrieve_sql_requires_user_id():
 
 
 @patch("src.graph.nodes.retrieve_sql._ENGINE", new=object())
-@patch("src.graph.nodes.retrieve_sql.q")
-def test_order_lookup_scoped_to_user(mock_queries):
-    mock_queries.get_order_for_user.return_value = {
+@patch("src.graph.nodes.retrieve_sql.get_order_for_user")
+def test_order_lookup_scoped_to_user(mock_get_order):
+    mock_get_order.return_value = {
         "order_id": 1,
         "customer_email": "user@example.com",
         "first_name": "Alice",
@@ -37,9 +37,9 @@ def test_order_lookup_scoped_to_user(mock_queries):
     state = make_state("order #1")
     result = retrieve_sql_node(state)
 
-    mock_queries.get_order_for_user.assert_called_once()
-    assert mock_queries.get_order_for_user.call_args[0][1] == state.user_id
-    assert mock_queries.get_order_for_user.call_args[0][2] == 1
+    mock_get_order.assert_called_once()
+    assert mock_get_order.call_args[0][1] == state.user_id
+    assert mock_get_order.call_args[0][2] == 1
 
     assert result.sql_rows[0]["order_id"] == 1
     assert result.sql_rows[0]["customer_email"].startswith("u***@")
@@ -49,11 +49,11 @@ def test_order_lookup_scoped_to_user(mock_queries):
 
 
 @patch("src.graph.nodes.retrieve_sql._ENGINE", new=object())
-@patch("src.graph.nodes.retrieve_sql.q")
-def test_no_order_id_skips_lookup(mock_queries):
+@patch("src.graph.nodes.retrieve_sql.get_order_for_user")
+def test_no_order_id_skips_lookup(mock_get_order):
     state = make_state("where is my order?")
     result = retrieve_sql_node(state)
 
-    mock_queries.get_order_for_user.assert_not_called()
+    mock_get_order.assert_not_called()
     assert result.sql_rows == []
     assert result.order_id is None

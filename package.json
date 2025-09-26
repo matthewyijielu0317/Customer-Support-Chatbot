@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.2",
+    "axios": "^1.12.2",
+    "lucide-react": "^0.544.0",
+    "react-hook-form": "^7.63.0",
+    "react-router-dom": "^7.9.2"
+  }
+}

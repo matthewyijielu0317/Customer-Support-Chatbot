@@ -39,3 +39,32 @@ def get_order_for_user(engine: Engine, user_id: str, order_id: int) -> Optional[
         ).mappings().first()
 
     return dict(row) if row else None
+
+
+def verify_user_credentials(engine: Engine, user_id: str, passcode: str) -> Optional[Dict[str, Any]]:
+    """Verify user credentials against the customers table.
+    
+    Args:
+        engine: SQLAlchemy engine
+        user_id: User identifier (email)
+        passcode: Passcode to verify
+        
+    Returns:
+        Customer details if credentials are valid, else None
+    """
+    statement = text(
+        """
+        SELECT customer_id, first_name, last_name, email, user_id
+        FROM customers
+        WHERE user_id = :user_id AND passcode = :passcode
+        LIMIT 1
+        """
+    )
+
+    with engine.connect() as conn:
+        row = conn.execute(
+            statement,
+            {"user_id": user_id, "passcode": passcode},
+        ).mappings().first()
+
+    return dict(row) if row else None

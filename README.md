@@ -6,7 +6,7 @@ This project prototypes a customer-support Retrieval-Augmented Generation (RAG) 
 
 1. **Clone & install:** use Python 3.12, create a virtualenv, run `pip install -r requirements.txt`.
 2. **Environment variables:** copy `.env.example` to `.env`, provide your own API keys/connection strings. The real `.env` should stay out of version control.
-3. **Bootstrap data:** synthetic CSV fixtures live under `data/` (`fake_customers.csv`, `fake_orders.csv`, etc.). Load them into Postgres via `python scripts/ingest_tabular.py --dsn ... --customers data/fake_customers.csv ...`. The app assumes those tables exist at runtime.
+3. **Bootstrap data:** synthetic CSV fixtures live under `data/` (`fake_customers.csv`, `fake_orders.csv`, etc.). Load them into Postgres via the API endpoint `POST /v1/ingest/csv` or by running the container with data mounted. The app assumes those tables exist at runtime.
 4. **Run services:** start Redis, MongoDB, and Postgres locally (or via `docker compose -f deploy/docker/compose.yaml up`). Then launch the FastAPI app (`uvicorn app.api.main:app --reload`).
 5. **(Optional) Launch the demo UI:** `streamlit run app/streamlit/main.py` opens a simple console for browsing sessions and chatting with the API.
 
@@ -14,7 +14,7 @@ This project prototypes a customer-support Retrieval-Augmented Generation (RAG) 
 
 - The CSV fixtures contain only synthetic data to keep the repo self-contained; no real PII is stored here.
 - `.env.example` enumerates required settings; you must supply your own secrets and never commit them.
-- A bootstrap script (see `scripts/ingest_tabular.py`) demonstrates how to load the sample dataset. For production, point the DSN at your managed database and ingest real data through your own pipeline.
+- The `/v1/ingest/csv` API endpoint demonstrates how to load the sample dataset. For production, point the DSN at your managed database and ingest real data through your own pipeline or API calls.
 
 ## Features
 

@@ -1,0 +1,19 @@
+# Don't copy these to Docker build context
+.git
+.gitignore
+README.md
+.env*
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+.mypy_cache/
+.DS_Store
+*.log
+.vscode/
+.idea/
+tests/

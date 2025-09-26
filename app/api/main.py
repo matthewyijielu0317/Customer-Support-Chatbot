@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 
-from app.api.routes import chat, ingest_docs, ingest_tabular, sessions
+from app.api.routes import auth, chat, ingest_docs, ingest_tabular, sessions
 from src.config.logging import configure_logging
 from src.config.settings import settings
 from src.cache.pinecone_semantic import PineconeSemanticCache
@@ -50,6 +50,7 @@ def create_app() -> FastAPI:
     app = FastAPI(title="Customer Support RAG API", version="0.1.0", lifespan=lifespan)
 
     # Routers
+    app.include_router(auth.router, prefix="/v1")
     app.include_router(chat.router, prefix="/v1")
     app.include_router(ingest_docs.router, prefix="/v1")
     app.include_router(ingest_tabular.router, prefix="/v1")
