@@ -1,6 +1,7 @@
 import { useAuth } from './hooks/useAuth';
 import { LoginPage } from './pages/LoginPage';
 import { WorkspacePage } from './pages/WorkspacePage';
+import { AgentDashboardPage } from './pages/AgentDashboardPage';
 
 function App() {
   const { user, isLoading } = useAuth();
@@ -13,7 +14,15 @@ function App() {
     );
   }
 
-  return user ? <WorkspacePage /> : <LoginPage />;
+  if (!user) {
+    return <LoginPage />;
+  }
+
+  if (user.role === 'agent') {
+    return <AgentDashboardPage />;
+  }
+
+  return <WorkspacePage />;
 }
 
 export default App;

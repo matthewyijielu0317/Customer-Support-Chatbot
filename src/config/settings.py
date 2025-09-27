@@ -28,6 +28,12 @@ class Settings(BaseSettings):
     session_summary_min_messages: int = Field(default=12, env="SESSION_SUMMARY_MIN_MESSAGES")
     session_summary_history_limit: int = Field(default=40, env="SESSION_SUMMARY_HISTORY_LIMIT")
     session_summary_max_chars: int = Field(default=256, env="SESSION_SUMMARY_MAX_CHARS")
+    slack_webhook_url: str = Field(default="", env="SLACK_WEBHOOK_URL")
+    slack_bot_token: str = Field(default="", env="SLACK_BOT_TOKEN")
+    slack_channel_id: str = Field(default="", env="SLACK_CHANNEL_ID")
+    frontend_base_url: str = Field(default="", env="FRONTEND_BASE_URL")
+    admin_email: str = Field(default="", env="ADMIN_EMAIL")
+    admin_passcode: str = Field(default="", env="ADMIN_PASSCODE")
 
     class Config:
         env_file = ".env"

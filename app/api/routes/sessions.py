@@ -265,6 +265,7 @@ async def close_session_endpoint(
         if stored_user != user_id:
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Session does not belong to user")
         history = session_store.get_all_messages(session_id)
+        agent_id = meta.get("agent_id")
         summary_text = payload.summary or meta.get("session_summary")
         if not summary_text and history:
             summary_payload = [
@@ -318,6 +319,9 @@ async def close_session_endpoint(
                 message_count=len(history),
             )
         mongo.close_session(session_id, summary=summary_text, metadata=combined_metadata or None)
+        session_store.dequeue_escalation(session_id)
+        if agent_id:
+            session_store.unassign_agent_session(session_id, agent_id)
         session_store.delete_session(session_id)
         session_store.unregister_session(session_id, user_id)
         updated = mongo.get_session(session_id)

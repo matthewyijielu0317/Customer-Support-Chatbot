@@ -9,7 +9,7 @@ interface ChatInterfaceProps {
 }
 
 export function ChatInterface({ sessionId }: ChatInterfaceProps) {
-  const { messages, isLoading, error, postMessage } = useMessages(sessionId);
+  const { messages, isLoading, error, postMessage, isEscalated } = useMessages(sessionId);
 
   if (isLoading) return <Loading />;
   if (error) return <ErrorMessage message={error} />;
@@ -17,6 +17,11 @@ export function ChatInterface({ sessionId }: ChatInterfaceProps) {
   return (
     <div className="flex flex-col h-full bg-gray-800">
       <MessageList messages={messages} />
+      {isEscalated && (
+        <div className="px-4 py-2 bg-yellow-900 text-yellow-200 text-sm border-t border-yellow-700">
+          A human specialist is handling this conversation. Feel free to continue typing here.
+        </div>
+      )}
       <MessageInput onSendMessage={postMessage} />
     </div>
   );

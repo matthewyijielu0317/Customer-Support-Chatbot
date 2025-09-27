@@ -31,6 +31,20 @@ async def login(payload: LoginRequest) -> LoginResponse:
             detail="Database not configured",
         )
 
+    admin_email = settings.admin_email.strip()
+    admin_passcode = settings.admin_passcode.strip()
+    if admin_email and admin_passcode:
+        if payload.email.strip().lower() == admin_email.lower() and payload.passcode == admin_passcode:
+            return LoginResponse(
+                success=True,
+                user={
+                    "email": admin_email,
+                    "first_name": "Support",
+                    "last_name": "Agent",
+                    "role": "agent",
+                },
+            )
+
     user = verify_user_credentials(
         _ENGINE, user_id=payload.email, passcode=payload.passcode
     )
@@ -39,6 +53,6 @@ async def login(payload: LoginRequest) -> LoginResponse:
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid credentials",
         )
-    
-    return LoginResponse(success=True, user=user)
+    user["role"] = "customer"
 
+    return LoginResponse(success=True, user=user)

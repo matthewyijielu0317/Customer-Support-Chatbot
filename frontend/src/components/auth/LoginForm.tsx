@@ -23,6 +23,10 @@ export function LoginForm({ onLogin, isLoggingIn }: LoginFormProps) {
     formState: { errors },
   } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: 'matthewyijielu0317@gmail.com',
+      passcode: '12345',
+    },
   });
 
   const onSubmit = async (data: LoginFormInputs) => {
@@ -93,4 +97,3 @@ export function LoginForm({ onLogin, isLoggingIn }: LoginFormProps) {
     </form>
   );
 }
-

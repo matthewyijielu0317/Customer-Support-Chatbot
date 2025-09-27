@@ -14,6 +14,7 @@ from src.config.settings import settings
 from src.utils.summarize import summarize_messages
 from src.utils.names import derive_name_from_email
 from src.utils.ids import generate_readable_session_id
+from src.integrations.slack import send_escalation_alert
 
 
 router = APIRouter(tags=["chat"])
@@ -37,9 +38,15 @@ class ChatResponse(BaseModel):
     should_escalate: bool = False
     trace_id: str = ""
     cache_hit: bool = False
+    session_status: str = "active"
 
 
 _graph = build_graph()
+
+ESCALATION_MESSAGE = (
+    "I'm escalating this conversation to a human support specialist. "
+    "Please stay with me while I connect you."
+)
 
 
 @router.post("/chat", response_model=ChatResponse)
@@ -116,6 +123,32 @@ async def chat_endpoint(
     session_summary = meta.get("session_summary")
     summary_message_count = int(meta.get("summary_message_count") or 0)
 
+    session_status = meta.get("status", "active")
+    if session_status in {"pending_handoff", "live_agent"}:
+        user_ts = datetime.now(timezone.utc)
+        session_store.append_message(
+            session_id,
+            {"role": "user", "content": payload.query, "created_at": user_ts.isoformat()},
+        )
+        meta.update(
+            {
+                "last_query": payload.query,
+                "last_updated": user_ts.isoformat(),
+                "message_count": int(meta.get("message_count", 0)) + 1,
+            }
+        )
+        session_store.write_session_meta(session_id, meta)
+        session_store.touch_session(session_id)
+        return ChatResponse(
+            session_id=session_id,
+            answer="",
+            citations=[],
+            should_escalate=False,
+            trace_id="",
+            cache_hit=False,
+            session_status=session_status,
+        )
+
     state = RAGState(
         query=payload.query,
         user_id=payload.user_id,
@@ -157,7 +190,16 @@ async def chat_endpoint(
         {"role": "user", "content": payload.query, "created_at": now.isoformat()},
     )
 
+    should_escalate = bool(out_dict.get("should_escalate", False))
+    escalation_reason = out_dict.get("escalation_reason")
     answer = str(out_dict.get("answer") or "")
+    if should_escalate:
+        answer = answer.strip()
+        if answer:
+            answer = f"{answer}\n\n{ESCALATION_MESSAGE}"
+        else:
+            answer = ESCALATION_MESSAGE
+
     assistant_ts = datetime.now(timezone.utc)
     session_store.append_message(
         session_id,
@@ -173,6 +215,21 @@ async def chat_endpoint(
             "message_count": meta_message_count,
         }
     )
+
+    notify_slack = False
+    if should_escalate:
+        previous_status = meta.get("status") or "active"
+        if previous_status not in {"pending_handoff", "live_agent"}:
+            meta["status"] = "pending_handoff"
+            meta["escalated_at"] = assistant_ts.isoformat()
+            meta["escalation_reason"] = escalation_reason or "User requested human assistance."
+            meta["escalated_query"] = payload.query
+            meta["escalated_answer"] = answer
+            notify_slack = True
+        else:
+            meta["status"] = previous_status
+    elif not meta.get("status"):
+        meta["status"] = "active"
 
     if (
         meta_message_count >= settings.session_summary_min_messages
@@ -197,15 +254,32 @@ async def chat_endpoint(
     session_store.write_session_meta(session_id, meta)
     session_store.touch_session(session_id)
 
+    if notify_slack:
+        session_store.enqueue_escalation(session_id)
+        session_link = ""
+        if settings.frontend_base_url:
+            session_link = f"{settings.frontend_base_url.rstrip('/')}/?session_id={session_id}&view=agent"
+        await send_escalation_alert(
+            session_id=session_id,
+            user_email=payload.user_id,
+            user_query=payload.query,
+            assistant_answer=answer,
+            escalation_reason=meta.get("escalation_reason"),
+            ui_url=session_link or None,
+        )
+
     cache_hit = bool(out_dict.get("cache_hit", False))
+
+    session_status = meta.get("status", "active")
 
     response = ChatResponse(
         session_id=session_id,
         answer=answer,
         citations=resp_citations,
-        should_escalate=bool(out_dict.get("should_escalate", False)),
+        should_escalate=should_escalate,
         trace_id=str(out_dict.get("trace_id") or ""),
         cache_hit=cache_hit,
+        session_status=session_status,
     )
 
     return response

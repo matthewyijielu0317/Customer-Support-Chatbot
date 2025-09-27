@@ -97,6 +97,14 @@ class RedisSessionStore:
     def _messages_key(cls, session_id: str) -> str:
         return f"{cls._meta_key(session_id)}:messages"
 
+    @staticmethod
+    def _escalations_key() -> str:
+        return "escalations:pending"
+
+    @staticmethod
+    def _agent_sessions_key(agent_id: str) -> str:
+        return f"agent_sessions:{agent_id}"
+
     def write_session_meta(self, session_id: str, data: Dict[str, Any]) -> None:
         meta = {**data, "session_id": session_id}
         meta.setdefault("updated_at", datetime.now(timezone.utc).isoformat())
@@ -187,3 +195,41 @@ class RedisSessionStore:
 
     def delete_session(self, session_id: str) -> None:
         self.kv.delete(self._meta_key(session_id), self._messages_key(session_id))
+
+    # Escalation queue helpers -----------------------------------------------
+
+    def enqueue_escalation(self, session_id: str) -> None:
+        self.kv.sadd(self._escalations_key(), session_id)
+
+    def dequeue_escalation(self, session_id: str) -> None:
+        self.kv.srem(self._escalations_key(), session_id)
+
+    def list_escalations(self) -> List[Dict[str, Any]]:
+        session_ids = sorted(self.kv.smembers(self._escalations_key()))
+        metas: List[Dict[str, Any]] = []
+        for sid in session_ids:
+            meta = self.read_session_meta(sid)
+            if meta:
+                metas.append(meta)
+        return metas
+
+    def assign_agent_session(self, session_id: str, agent_id: str) -> None:
+        if not agent_id:
+            return
+        self.kv.sadd(self._agent_sessions_key(agent_id), session_id)
+
+    def unassign_agent_session(self, session_id: str, agent_id: str) -> None:
+        if not agent_id:
+            return
+        self.kv.srem(self._agent_sessions_key(agent_id), session_id)
+
+    def list_agent_sessions(self, agent_id: str) -> List[Dict[str, Any]]:
+        if not agent_id:
+            return []
+        session_ids = sorted(self.kv.smembers(self._agent_sessions_key(agent_id)))
+        metas: List[Dict[str, Any]] = []
+        for sid in session_ids:
+            meta = self.read_session_meta(sid)
+            if meta:
+                metas.append(meta)
+        return metas

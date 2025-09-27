@@ -8,6 +8,7 @@ export function useMessages(sessionId: string | null) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isEscalated, setIsEscalated] = useState(false);
 
   const loadMessages = useCallback(async () => {
     if (!user || !sessionId) {
@@ -19,6 +20,9 @@ export function useMessages(sessionId: string | null) {
     try {
       const fetchedMessages = await api.getMessages(sessionId, user.email);
       setMessages(fetchedMessages);
+      if (fetchedMessages.some((msg) => msg.role === 'agent')) {
+        setIsEscalated(true);
+      }
     } catch (err) {
       setError('Failed to load messages.');
     } finally {
@@ -29,6 +33,10 @@ export function useMessages(sessionId: string | null) {
   useEffect(() => {
     loadMessages();
   }, [loadMessages]);
+
+  useEffect(() => {
+    setIsEscalated(false);
+  }, [sessionId]);
 
   const postMessage = async (query: string) => {
     if (!user) return;
@@ -43,18 +51,26 @@ export function useMessages(sessionId: string | null) {
 
     try {
       const response = await api.sendMessage(user.email, query, sessionId || undefined);
-      const assistantMessage: Message = {
-        role: 'assistant',
-        content: response.answer,
-        created_at: new Date().toISOString(),
-        session_id: response.session_id,
-      };
-      setMessages((prev) => [...prev, assistantMessage]);
+      if (response.answer) {
+        const assistantMessage: Message = {
+          role: 'assistant',
+          content: response.answer,
+          created_at: new Date().toISOString(),
+          session_id: response.session_id,
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      }
+      if (response.session_status && response.session_status !== 'active') {
+        setIsEscalated(true);
+      }
+      if (response.should_escalate) {
+        setIsEscalated(true);
+      }
     } catch (err) {
       setError('Failed to send message.');
       setMessages((prev) => prev.slice(0, -1)); // Remove user message on error
     }
   };
 
-  return { messages, isLoading, error, postMessage };
+  return { messages, isLoading, error, postMessage, isEscalated };
 }

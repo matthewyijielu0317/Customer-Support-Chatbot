@@ -1,5 +1,13 @@
 import axios from 'axios';
-import type { User, Session, Message, ChatResponse, HealthStatus } from './types';
+import type {
+  User,
+  Session,
+  Message,
+  ChatResponse,
+  HealthStatus,
+  EscalationSummary,
+  EscalationDetail,
+} from './types';
 
 // Use relative URL in production (nginx proxy) or localhost in development
 const API_BASE_URL = import.meta.env.PROD ? '/v1' : 'http://localhost:8000/v1';
@@ -54,5 +62,38 @@ export const sendMessage = async (
 
 export const getHealth = async () => {
   const response = await apiClient.get<HealthStatus>('/health');
+  return response.data;
+};
+
+export const getEscalations = async (agentId?: string) => {
+  const response = await apiClient.get<{ escalations: EscalationSummary[] }>(
+    '/escalations',
+    { params: agentId ? { agent_id: agentId } : undefined }
+  );
+  return response.data.escalations;
+};
+
+export const getEscalationDetail = async (sessionId: string) => {
+  const response = await apiClient.get<EscalationDetail>(`/escalations/${sessionId}`);
+  return response.data;
+};
+
+export const claimEscalation = async (sessionId: string, agentId: string) => {
+  const response = await apiClient.post<EscalationSummary>(
+    `/escalations/${sessionId}/claim`,
+    { agent_id: agentId }
+  );
+  return response.data;
+};
+
+export const sendAgentMessage = async (
+  sessionId: string,
+  agentId: string,
+  content: string
+) => {
+  const response = await apiClient.post<{ status: string; messages: Message[] }>(
+    `/escalations/${sessionId}/messages`,
+    { agent_id: agentId, content }
+  );
   return response.data;
 };

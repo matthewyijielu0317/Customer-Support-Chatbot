@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from fastapi.testclient import TestClient
-from unittest.mock import patch
+from unittest.mock import AsyncMock, patch
 
 from app.api.main import create_app
 from app.api.deps import get_mongo, get_session_store, get_semantic_cache
 from app.api.routes import chat as chat_module
 from src.cache.pinecone_semantic import PineconeSemanticCache
+from src.config.settings import settings
 from src.persistence.redis import RedisKV, RedisSessionStore
 from src.graph.state import Citation
 from src.persistence.mongo import Mongo
@@ -146,3 +147,65 @@ def test_chat_endpoint_creates_and_updates_session():
             json={"user_id": "bob", "session_id": session_id, "query": "Hi"},
         )
         assert forbidden.status_code == 403
+
+
+class EscalationGraph:
+    def invoke(self, state):  # type: ignore[no-untyped-def]
+        return {
+            "answer": "",
+            "should_escalate": True,
+            "escalation_reason": "User explicitly requested a human",
+        }
+
+
+def test_chat_endpoint_triggers_slack_on_escalation():
+    app = create_app()
+    chat_module._graph = EscalationGraph()
+
+    session_store = _build_session_store()
+    mongo = _build_mongo()
+    semantic_cache = _build_semantic_cache()
+
+    app.dependency_overrides[get_session_store] = lambda: session_store
+    app.dependency_overrides[get_mongo] = lambda: mongo
+    app.dependency_overrides[get_semantic_cache] = lambda: semantic_cache
+
+    client = TestClient(app)
+
+    original_webhook = settings.slack_webhook_url
+    settings.slack_webhook_url = "https://example.com/webhook"
+    try:
+        with patch("app.api.routes.chat.send_escalation_alert", new_callable=AsyncMock) as mock_slack:
+            response = client.post(
+                "/v1/chat",
+                json={"user_id": "user@example.com", "query": "I need a human"},
+            )
+            assert response.status_code == 200
+            payload = response.json()
+            assert payload["should_escalate"] is True
+            assert payload["answer"].endswith("Please stay with me while I connect you.")
+            assert payload["session_status"] == "pending_handoff"
+
+            session_id = payload["session_id"]
+            meta = session_store.read_session_meta(session_id)
+            assert meta["status"] == "pending_handoff"
+            assert meta["escalation_reason"] == "User explicitly requested a human"
+
+            escalations = session_store.list_escalations()
+            assert len(escalations) == 1
+            assert escalations[0]["session_id"] == session_id
+
+            assert mock_slack.await_count == 1
+
+            second = client.post(
+                "/v1/chat",
+                json={"user_id": "user@example.com", "session_id": session_id, "query": "still waiting"},
+            )
+            assert second.status_code == 200
+            second_payload = second.json()
+            assert second_payload["answer"] == ""
+            assert second_payload["session_status"] == "pending_handoff"
+            assert mock_slack.await_count == 1  # no duplicate alerts
+            assert session_store.list_escalations()[0]["session_id"] == session_id
+    finally:
+        settings.slack_webhook_url = original_webhook

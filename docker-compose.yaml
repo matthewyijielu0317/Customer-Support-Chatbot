@@ -20,6 +20,12 @@ services:
       - POSTGRES_DSN=postgresql+psycopg://user:password@postgres:5432/ecomm
       - REDIS_URL=redis://redis:6379/0
       - MONGODB_URI=mongodb://mongo:27017
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_CHANNEL_ID=${SLACK_CHANNEL_ID}
+      - FRONTEND_BASE_URL=${FRONTEND_BASE_URL}
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSCODE=${ADMIN_PASSCODE}
     depends_on:
       - postgres
       - redis

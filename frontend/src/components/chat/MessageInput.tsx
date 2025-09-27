@@ -3,19 +3,26 @@ import { Send } from 'lucide-react';
 
 interface MessageInputProps {
   onSendMessage: (message: string) => Promise<void>;
+  disabled?: boolean;
 }
 
-export function MessageInput({ onSendMessage }: MessageInputProps) {
+export function MessageInput({ onSendMessage, disabled = false }: MessageInputProps) {
   const [input, setInput] = useState('');
   const [isSending, setIsSending] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (disabled) {
+      return;
+    }
     if (input.trim() && !isSending) {
       setIsSending(true);
-      await onSendMessage(input);
-      setInput('');
-      setIsSending(false);
+      try {
+        await onSendMessage(input);
+        setInput('');
+      } finally {
+        setIsSending(false);
+      }
     }
   };
 
@@ -34,11 +41,11 @@ export function MessageInput({ onSendMessage }: MessageInputProps) {
           placeholder="Type your message..."
           className="w-full bg-gray-700 text-white rounded-lg p-2 pr-12 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           rows={2}
-          disabled={isSending}
+          disabled={isSending || disabled}
         />
         <button
           type="submit"
-          disabled={isSending || !input.trim()}
+          disabled={isSending || !input.trim() || disabled}
           className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-400 disabled:opacity-50"
         >
           <Send size={20} />
@@ -47,4 +54,3 @@ export function MessageInput({ onSendMessage }: MessageInputProps) {
     </form>
   );
 }
-

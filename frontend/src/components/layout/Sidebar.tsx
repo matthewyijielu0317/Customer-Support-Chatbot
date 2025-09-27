@@ -24,7 +24,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-80 bg-gray-900 p-4 border-r border-gray-700 flex flex-col">
+    <aside className="bg-gray-950 border-r border-gray-800 flex flex-col p-6">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold">Sessions</h2>
         <NewSessionButton
@@ -48,7 +48,7 @@ export function Sidebar() {
       {isLoading && sessions.length === 0 && <Loading />}
       {error && <ErrorMessage message={error} />}
       
-      <div className="overflow-y-auto flex-1">
+      <div className="overflow-y-auto flex-1 pr-4">
         <SessionList
           sessions={sessions}
           activeSessionId={activeSessionId}
