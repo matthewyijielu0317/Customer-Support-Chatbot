@@ -24,16 +24,16 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="bg-gray-950 border-r border-gray-800 flex flex-col p-6">
+    <aside className="bg-gray-950 border-r border-gray-800 flex flex-col p-5">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold">Sessions</h2>
+        <h2 className="text-base font-semibold tracking-tight">Sessions</h2>
         <NewSessionButton
           onClick={createNewSession}
           isLoading={isLoading && sessions.length === 0}
         />
       </div>
 
-      <div className="mb-4">
+      <div className="mb-3">
         <label className="flex items-center space-x-2 text-sm text-gray-400">
           <input
             type="checkbox"

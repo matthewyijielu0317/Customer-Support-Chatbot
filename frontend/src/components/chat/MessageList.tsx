@@ -13,7 +13,7 @@ export function MessageList({ messages }: MessageListProps) {
   }, [messages]);
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex-1 overflow-y-auto p-6 space-y-3">
       {messages.map((msg, index) => (
         <div
           key={index}
@@ -22,13 +22,13 @@ export function MessageList({ messages }: MessageListProps) {
           }`}
         >
           <div
-            className={`max-w-lg px-4 py-2 rounded-lg ${
+            className={`max-w-2xl px-4 py-2 rounded-xl shadow ${
               msg.role === 'user'
-                ? 'bg-indigo-600'
-                : 'bg-gray-700'
+                ? 'bg-indigo-600 text-white'
+                : 'bg-gray-700 text-gray-100'
             }`}
           >
-            <p className="text-sm">{msg.content}</p>
+            <p className="text-sm leading-6 whitespace-pre-wrap">{msg.content}</p>
           </div>
         </div>
       ))}

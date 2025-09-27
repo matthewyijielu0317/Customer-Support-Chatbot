@@ -16,10 +16,10 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center px-4">
-      <div className="w-full max-w-md mx-auto bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-8 text-center space-y-6">
+    <div className="h-screen w-full bg-gray-900 text-white flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-gray-800 border border-gray-700 rounded-xl shadow-lg p-8 text-center space-y-6">
         <div>
-          <h2 className="text-3xl font-bold">Customer Support Chatbot</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">Customer Support Chatbot</h2>
         </div>
         <div className="bg-gray-900/70 border border-gray-700 rounded-lg p-6 text-left">
           <h3 className="text-lg font-semibold text-center mb-4">Login Form</h3>

@@ -10,10 +10,10 @@ export function WorkspacePage() {
       {activeSessionId ? (
         <ChatInterface sessionId={activeSessionId} />
       ) : (
-        <div className="flex flex-col items-center justify-center h-full">
-          <h1 className="text-3xl font-bold">
+        <div className="flex flex-col items-center justify-center h-full text-center">
+          <p className="text-xl text-gray-300 max-w-2xl">
             Select a session or create a new one to start chatting
-          </h1>
+          </p>
         </div>
       )}
     </Layout>
