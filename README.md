@@ -2,6 +2,48 @@
 
 This project is a sophisticated, full-stack customer support chatbot that leverages a Retrieval-Augmented Generation (RAG) pipeline. It's designed to provide intelligent, context-aware responses by drawing from both unstructured documents and structured databases. The application is fully containerized with Docker for easy setup and deployment.
 
+### System Architecture
+
+The application is designed with a modern, services-oriented architecture, consisting of a frontend web application, a backend API, and a suite of data stores. The entire system is containerized using Docker, making it portable and easy to deploy.
+
+![System Architecture Diagram](./diagrams/System_Architecture.png)
+
+Here’s a breakdown of the main components:
+
+*   **Frontend:** A single-page application (SPA) built with **React** and **TypeScript**, using **Vite** for the build tooling. It provides the user interface for the chatbot and the agent dashboard. The frontend interacts with the backend via a REST API. It is served by **Nginx** in the Docker setup.
+
+*   **Backend API:** A robust backend service built with **FastAPI** (Python). It serves as the central hub of the system, handling business logic, user authentication, and orchestrating the RAG pipeline. It exposes several endpoints for managing chat sessions, ingesting data, and handling escalations.
+
+*   **Data Stores:** The system utilizes a polyglot persistence approach, using different databases for different purposes:
+    *   **PostgreSQL:** A relational database used to store structured data, such as customer and order information.
+    *   **MongoDB:** A NoSQL document database, likely used for storing chat histories and other semi-structured data.
+    *   **Redis:** An in-memory data store used for caching and managing user sessions, ensuring fast access to session data.
+    *   **Pinecone:** A managed vector database used for the RAG pipeline. It stores document embeddings for efficient similarity search and also serves as a semantic cache for chat responses.
+
+*   **Integrations:**
+    *   **OpenAI:** The system leverages OpenAI's language models (e.g., `gpt-4o-mini`) for various tasks within the RAG pipeline, including query classification, response generation, and groundedness checking.
+    *   **Slack:** The application is integrated with Slack to send real-time alerts when a user escalates a conversation to a human agent.
+
+### RAG Pipeline
+
+The RAG pipeline is the core of the chatbot's intelligence. It is implemented as a sophisticated state machine using **LangGraph**, which allows for a flexible and powerful flow of logic. The pipeline processes user queries to generate accurate, context-aware, and grounded responses.
+
+![RAG Pipeline Diagram](./diagrams/RAG_Pipeline.png)
+
+The pipeline consists of several nodes, each performing a specific task:
+
+1.  **Router:** This is the entry point of the pipeline. It uses an LLM to classify the user's query into one of several predefined categories (e.g., `chitchat`, `order_lookup`, `escalation`). This classification determines the subsequent path through the graph, deciding whether to retrieve data from the SQL database, the document store, or both.
+
+2.  **Cache Check:** Before executing the full pipeline, the system checks a semantic cache (powered by Pinecone) for similar, previously answered queries. If a sufficiently similar query is found, the cached response is returned immediately, reducing latency and cost.
+
+3.  **SQL Retrieval:** If the router determines that the query requires specific information about an order or customer, this node connects to the **PostgreSQL** database to fetch the relevant data. This allows the chatbot to answer questions like "What is the status of my order?".
+
+4.  **Document Retrieval:** For queries related to policies, product information, or other general knowledge, this node retrieves relevant documents from the **Pinecone** vector store. The retrieved documents are then passed through a reranker to ensure that only the most relevant information is used to generate the answer.
+
+5.  **Generation:** This is the heart of the RAG pipeline. It uses a powerful LLM to synthesize an answer based on all the information gathered in the previous steps, including the original user query, data from the SQL database, content from the retrieved documents, and the recent conversation history.
+
+6.  **Groundedness Check:** After a response is generated, this final node acts as a quality control step. It uses an LLM to verify that the generated answer is directly supported by the information retrieved from the database or documents. If the answer is found to be "ungrounded," the system can attempt to regenerate it with feedback, ensuring higher accuracy and reducing hallucinations.
+
 ## Features
 
 - **Conversational AI:** A session-aware chat interface that maintains conversation history.
