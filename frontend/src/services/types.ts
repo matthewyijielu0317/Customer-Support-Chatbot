@@ -12,6 +12,7 @@ export interface Session {
   created_at: string;
   updated_at?: string;
   summary?: string;
+  message_count?: number;
 }
 
 export interface Message {
@@ -20,6 +21,7 @@ export interface Message {
   role: 'user' | 'assistant' | 'agent';
   content: string;
   created_at: string;
+  timestamp?: string;
   agent_id?: string;
 }
 

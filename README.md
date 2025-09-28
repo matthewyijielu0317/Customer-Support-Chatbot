@@ -2,6 +2,40 @@
 
 This project is a sophisticated, full-stack customer support chatbot that leverages a Retrieval-Augmented Generation (RAG) pipeline. It's designed to provide intelligent, context-aware responses by drawing from both unstructured documents and structured databases. The application is fully containerized with Docker for easy setup and deployment.
 
+## Demo: Customer Support Flow
+
+The following sequence demonstrates a typical customer support interaction flow, showing how the chatbot handles various scenarios and escalates to human agents when needed:
+
+### 1. Initial Customer Query - Return Policy
+![Customer asks about return policy](./diagrams/ask_for_return_policy_1.png)
+
+The customer initiates a conversation by asking about the return policy. The chatbot uses its RAG pipeline to retrieve relevant information from the policy documents and provides a comprehensive response.
+
+### 2. Order-Specific Inquiry and Agent Request
+![Customer asks for order number and requests human agent](./diagrams/ask_for_order_number_and_human_agent_2.png)
+
+When the customer needs specific order information or requests to speak with a human agent, the chatbot can handle both structured data queries and escalation requests.
+
+### 3. Slack Notification System
+![Slack notification sent to support team](./diagrams/notice_on_slack_3.png)
+
+When a customer requests human assistance, the system automatically sends a notification to the support team via Slack integration, ensuring timely response to escalations.
+
+### 4. Human Agent Intervention
+![Human agent intervenes in the conversation](./diagrams/human_agent_intervene_4.png)
+
+A human support agent receives the notification and can review the conversation history before taking over the chat session.
+
+### 5. Human Agent Takes Control
+![Human agent starts talking with customer](./diagrams/human_agent_start_talking_5.png)
+
+The human agent seamlessly takes over the conversation, with full context of the previous interactions, ensuring continuity in customer service.
+
+### 6. Ongoing Human Support
+![Customer receives message from human agent](./diagrams/received_message_from_human_agent_6.png)
+
+The customer continues to receive personalized support from the human agent, with the system maintaining the conversation flow and history.
+
 ### System Architecture
 
 The application is designed with a modern, services-oriented architecture, consisting of a frontend web application, a backend API, and a suite of data stores. The entire system is containerized using Docker, making it portable and easy to deploy.
@@ -105,19 +139,49 @@ The application is composed of several services that work together:
 ### Prerequisites
 
 - Docker and Docker Compose
-- An OpenAI API key
-- A Pinecone API key
+- An OpenAI API key (get one from [OpenAI Platform](https://platform.openai.com/api-keys))
+- A Pinecone API key (get one from [Pinecone Console](https://app.pinecone.io/))
+- A Pinecone index named `ecomm-policies-v1` with:
+  - **Dimensions**: 1536 (for OpenAI's `text-embedding-3-small` model)
+  - **Metric**: cosine
 
 ### 1. Environment Setup
 
-Create a `.env` file in the project root by copying the `.env.example` file (if it exists) or creating a new one. Add your API keys:
+Create a `.env` file in the project root by copying the provided `.env.example` file:
 
 ```bash
-OPENAI_API_KEY="your_openai_api_key"
-PINECONE_API_KEY="your_pinecone_api_key"
+cp .env.example .env
 ```
 
-You will also need to create a Pinecone index named `ecomm-policies-v1` with `1536` dimensions (for OpenAI's `text-embedding-3-small` model) and a `cosine` metric.
+Then edit the `.env` file and update the following required variables:
+
+```bash
+# Core API Keys (Required)
+OPENAI_API_KEY="your_openai_api_key_here"
+PINECONE_API_KEY="your_pinecone_api_key_here"
+
+# Application Environment
+ENVIRONMENT="dev"
+
+# Database Connection Strings (Default values for Docker)
+POSTGRES_DSN="postgresql+psycopg://user:password@localhost:5433/ecomm"
+REDIS_URL="redis://localhost:6379/0"
+MONGODB_URI="mongodb://localhost:27017"
+
+# Frontend Configuration
+FRONTEND_BASE_URL="http://localhost:3000"
+
+# Admin User Credentials
+ADMIN_EMAIL="admin@example.com"
+ADMIN_PASSCODE="admin_passcode"
+
+# Slack Integration (Optional - leave empty if not using)
+SLACK_WEBHOOK_URL=""
+SLACK_BOT_TOKEN=""
+SLACK_CHANNEL_ID=""
+```
+
+**Important**: You must provide your own OpenAI and Pinecone API keys. The other values can remain as defaults for local Docker development.
 
 ### 2. Build and Run the Application
 
@@ -154,7 +218,7 @@ To ingest the policy documents into Pinecone, run:
 curl -X POST "http://localhost:8000/v1/ingest/docs" \
   -H "Content-Type: application/json" \
   -d '{
-    "directory_path": "/app/data"
+    "sources": ["/app/data"]
   }'
 ```
 
@@ -164,6 +228,30 @@ curl -X POST "http://localhost:8000/v1/ingest/docs" \
 - **Backend API Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
 
 You can log in with any email from `fake_customers.csv` and the passcode `12345`. For example: `dmadocjones0@oracle.com`.
+
+## Troubleshooting
+
+### Common Issues
+
+**1. CSV Ingestion Fails with Authentication Error**
+- Ensure all environment variables are set correctly in your `.env` file
+- Verify that the PostgreSQL service is running: `docker-compose ps postgres`
+- Check the logs: `docker-compose logs postgres`
+
+**2. Document Ingestion Fails**
+- Verify your Pinecone API key is correct
+- Ensure you've created the Pinecone index `ecomm-policies-v1` with the correct dimensions (1536) and metric (cosine)
+- Check the API logs: `docker-compose logs api`
+
+**3. Frontend Not Loading**
+- Ensure all services are running: `docker-compose ps`
+- Try rebuilding: `docker-compose down && docker-compose up --build`
+- Check if port 3000 is available: `lsof -i :3000`
+
+**4. Services Won't Start**
+- Make sure Docker is running
+- Check for port conflicts (ports 3000, 8000, 5433, 6379, 27017)
+- Try: `docker-compose down && docker system prune -f && docker-compose up --build`
 
 ## Development
 

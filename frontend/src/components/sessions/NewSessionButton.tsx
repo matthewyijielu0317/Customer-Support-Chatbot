@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react';
+import { Plus, Loader2 } from 'lucide-react';
 
 interface NewSessionButtonProps {
   onClick: () => void;
@@ -13,10 +13,22 @@ export function NewSessionButton({
     <button
       onClick={onClick}
       disabled={isLoading}
-      className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+      className="group relative inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-500 hover:to-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-950 disabled:opacity-50 disabled:cursor-not-allowed rounded-xl shadow-soft hover:shadow-medium transition-all duration-200 overflow-hidden"
     >
-      <Plus size={16} />
-      {isLoading ? 'Creating…' : 'New Session'}
+      {/* Background animation */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+      
+      {/* Button content */}
+      <div className="relative flex items-center gap-2">
+        {isLoading ? (
+          <Loader2 size={16} className="animate-spin" />
+        ) : (
+          <Plus size={16} className="transition-transform group-hover:scale-110" />
+        )}
+        <span className="font-medium">
+          {isLoading ? 'Creating…' : 'New Session'}
+        </span>
+      </div>
     </button>
   );
 }
